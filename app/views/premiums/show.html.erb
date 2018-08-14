@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subline:</strong>
+  <%= @premium.subline_id %>
+</p>
+
+<p>
+  <strong>Peril:</strong>
+  <%= @premium.peril_id %>
+</p>
+
+<p>
+  <strong>Subline factor:</strong>
+  <%= @premium.subline_factor %>
+</p>
+
+<p>
+  <strong>Coverage limit:</strong>
+  <%= @premium.coverage_limit %>
+</p>
+
+<p>
+  <strong>Coverage duration:</strong>
+  <%= @premium.coverage_duration %>
+</p>
+
+<p>
+  <strong>Premium:</strong>
+  <%= @premium.premium %>
+</p>
+
+<p>
+  <strong>Prem type:</strong>
+  <%= @premium.prem_type %>
+</p>
+
+<p>
+  <strong>Taxed:</strong>
+  <%= @premium.taxed %>
+</p>
+
+<%= link_to 'Edit', edit_premium_path(@premium) %> |
+<%= link_to 'Back', premiums_path %>

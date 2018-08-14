@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Charge type:</strong>
+  <%= @charge_rate.charge_type_id %>
+</p>
+
+<p>
+  <strong>Qualifier:</strong>
+  <%= @charge_rate.qualifier %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @charge_rate.rate %>
+</p>
+
+<p>
+  <strong>Rate type:</strong>
+  <%= @charge_rate.rate_type %>
+</p>
+
+<%= link_to 'Edit', edit_charge_rate_path(@charge_rate) %> |
+<%= link_to 'Back', charge_rates_path %>

@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814090603) do
+ActiveRecord::Schema.define(version: 20180814110425) do
+
+  create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "charge_type_id"
+    t.string "qualifier"
+    t.decimal "rate", precision: 6, scale: 2
+    t.string "rate_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "charge_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "shortname"
+    t.integer "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -27,6 +44,19 @@ ActiveRecord::Schema.define(version: 20180814090603) do
     t.string "shortname"
     t.date "from"
     t.date "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "premiums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "subline_id"
+    t.integer "peril_id"
+    t.string "subline_factor"
+    t.decimal "coverage_limit", precision: 10
+    t.integer "coverage_duration"
+    t.decimal "premium", precision: 6, scale: 2
+    t.string "prem_type"
+    t.boolean "taxed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
