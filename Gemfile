@@ -53,7 +53,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'ruby-oci8'
+gem 'ruby-oci8', require: 'oci8'
 gem 'activerecord-oracle_enhanced-adapter'
 gem 'ar-octopus', :git => "git://github.com/tchandy/octopus.git", :require => "octopus"
 

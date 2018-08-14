@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :perils
+  resources :sublines
+  resources :lines
   get 'claims/index'
 
   get 'claims/show'

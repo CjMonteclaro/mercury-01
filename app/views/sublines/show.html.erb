@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Line:</strong>
+  <%= @subline.line_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @subline.name %>
+</p>
+
+<p>
+  <strong>Shortname:</strong>
+  <%= @subline.shortname %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @subline.from %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @subline.to %>
+</p>
+
+<%= link_to 'Edit', edit_subline_path(@subline) %> |
+<%= link_to 'Back', sublines_path %>

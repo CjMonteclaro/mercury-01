@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Perils</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Line</th>
+      <th>Name</th>
+      <th>Shortname</th>
+      <th>From</th>
+      <th>To</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @perils.each do |peril| %>
+      <tr>
+        <td><%= peril.line_id %></td>
+        <td><%= peril.name %></td>
+        <td><%= peril.shortname %></td>
+        <td><%= peril.from %></td>
+        <td><%= peril.to %></td>
+        <td><%= link_to 'Show', peril %></td>
+        <td><%= link_to 'Edit', edit_peril_path(peril) %></td>
+        <td><%= link_to 'Destroy', peril, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Peril', new_peril_path %>

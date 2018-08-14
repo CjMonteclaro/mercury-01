@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sublines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Line</th>
+      <th>Name</th>
+      <th>Shortname</th>
+      <th>From</th>
+      <th>To</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sublines.each do |subline| %>
+      <tr>
+        <td><%= subline.line_id %></td>
+        <td><%= subline.name %></td>
+        <td><%= subline.shortname %></td>
+        <td><%= subline.from %></td>
+        <td><%= subline.to %></td>
+        <td><%= link_to 'Show', subline %></td>
+        <td><%= link_to 'Edit', edit_subline_path(subline) %></td>
+        <td><%= link_to 'Destroy', subline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Subline', new_subline_path %>
