@@ -1,0 +1,2 @@
+class ChargeRate < ApplicationRecord
+end
