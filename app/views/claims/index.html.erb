@@ -1,0 +1,26 @@
+<h1>Claims</h1>
+
+<table class="table">
+  <thead>
+    <%= content_tag :th, 'Claim ID' %>
+    <%= content_tag :th, 'Assured' %>
+    <%= content_tag :th, 'Date of Loss' %>
+  </thead>
+
+  <tbody>
+    <% @claims.each do |claim| %>
+    <tr>
+      <td>
+        <%= content_tag :p, "ID: #{claim.claim_id}" %>
+        <%= content_tag :p, "ID: #{claim.no}" %>
+      </td>
+      <td>
+        <%= content_tag :p, claim.assd_no %>
+        <%= content_tag :p, claim.giis_assured.assd_name %>
+      </td>
+
+      <%= content_tag :td, claim.loss_date %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

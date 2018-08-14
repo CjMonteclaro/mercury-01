@@ -1,0 +1,16 @@
+octopus:
+  replicated: true
+  fully_replicated: true
+  environments:
+    - development
+
+  development:
+    shards:
+      oracle:
+        adapter: oracle_enhanced
+        pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+        host: 172.16.110.241
+        database: FGIC
+        username: CPI
+        password: CPI12345!
+        port: 1521
