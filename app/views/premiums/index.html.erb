@@ -30,13 +30,12 @@
         <td><%= premium.taxed %></td>
         <td><%= link_to 'Show', premium %></td>
         <td><%= link_to 'Edit', edit_premium_path(premium) %></td>
-        <td><%= link_to 'Destroy', premium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%#= link_to 'Destroy', premium, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
 <%= link_to 'New Premium', new_premium_path %>
 
