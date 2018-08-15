@@ -1,21 +1,16 @@
 Rails.application.routes.draw do
   resources :charge_rates
   resources :charge_types
-<<<<<<< HEAD
   resources :premiums
   resources :perils
   resources :sublines
   resources :lines
-=======
   resources :perils
   resources :sublines
   resources :lines
   resources :premiums do
-  collection do
-    post :import
+    collection { post :import }
   end
-end
->>>>>>> cj
   get 'claims/index'
 
   get 'claims/show'
