@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  charge_type_id: 1
+  qualifier: MyString
+  rate: 9.99
+  rate_type: MyString
+
+two:
+  charge_type_id: 1
+  qualifier: MyString
+  rate: 9.99
+  rate_type: MyString

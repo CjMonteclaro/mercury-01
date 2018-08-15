@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Line:</strong>
+  <%= @peril.line_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @peril.name %>
+</p>
+
+<p>
+  <strong>Shortname:</strong>
+  <%= @peril.shortname %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @peril.from %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @peril.to %>
+</p>
+
+<%= link_to 'Edit', edit_peril_path(@peril) %> |
+<%= link_to 'Back', perils_path %>
