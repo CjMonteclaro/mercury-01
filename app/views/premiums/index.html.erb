@@ -2,7 +2,7 @@
 
 <h1>Premiums</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Subline</th>
@@ -20,8 +20,8 @@
   <tbody>
     <% @premiums.each do |premium| %>
       <tr>
-        <td><%= premium.subline_id %></td>
-        <td><%= premium.peril_id %></td>
+        <td><%= premium.sublinename %></td>
+        <td><%= premium.perilname %></td>
         <td><%= premium.subline_factor %></td>
         <td><%= premium.coverage_limit %></td>
         <td><%= premium.coverage_duration %></td>
@@ -39,3 +39,9 @@
 <br>
 
 <%= link_to 'New Premium', new_premium_path %>
+
+<h2>Import Premiums</h2>
+<%= form_tag import_premiums_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>

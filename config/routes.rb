@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   resources :charge_rates
   resources :charge_types
-  resources :premiums
   resources :perils
   resources :sublines
   resources :lines
+  resources :premiums do
+  collection do
+    post :import
+  end
+end
   get 'claims/index'
 
   get 'claims/show'

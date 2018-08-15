@@ -60,3 +60,5 @@ gem 'ar-octopus', :git => "git://github.com/tchandy/octopus.git", :require => "o
 gem 'simple_form'
 gem 'bootstrap', '~> 4.1.1'
 gem 'bootstrap4-datetime-picker-rails'
+
+gem 'roo'
