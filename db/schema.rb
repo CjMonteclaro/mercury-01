@@ -64,8 +64,12 @@ ActiveRecord::Schema.define(version: 20180814110425) do
   create_table "sublines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "line_id"
     t.string "name"
+<<<<<<< HEAD
     t.string "policy_type"
     t.integer "creator_id"
+=======
+    t.string "shortname"
+>>>>>>> cj
     t.date "from"
     t.date "to"
     t.datetime "created_at", null: false

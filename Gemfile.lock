@@ -86,6 +86,7 @@ GEM
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
+    ffi (1.9.25-x86-mingw32)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (1.1.0)
@@ -114,8 +115,11 @@ GEM
       railties (>= 3.1)
     multi_json (1.13.1)
     mysql2 (0.5.2)
+    mysql2 (0.5.2-x86-mingw32)
     nio4r (2.3.1)
     nokogiri (1.8.4)
+      mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.4-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     popper_js (1.14.3)
     public_suffix (3.0.2)
@@ -150,7 +154,11 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    roo (2.7.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     ruby-oci8 (2.2.5.1)
+    ruby-oci8 (2.2.5.1-x86-mingw32)
     ruby-plsql (0.6.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
@@ -191,6 +199,8 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2018.5)
+      tzinfo (>= 1.0.0)
     uglifier (4.1.18)
       execjs (>= 0.3.0, < 3)
     web-console (3.6.2)
@@ -206,6 +216,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   activerecord-oracle_enhanced-adapter
@@ -220,6 +231,7 @@ DEPENDENCIES
   mysql2 (>= 0.3.18, < 0.6.0)
   puma (~> 3.7)
   rails (~> 5.1.6)
+  roo
   ruby-oci8
   sass-rails (~> 5.0)
   selenium-webdriver

@@ -2,7 +2,11 @@
 
 <h1>Premiums</h1>
 
+<<<<<<< HEAD
 <table>
+=======
+<table class="table">
+>>>>>>> cj
   <thead>
     <tr>
       <th>Subline</th>
@@ -20,8 +24,13 @@
   <tbody>
     <% @premiums.each do |premium| %>
       <tr>
+<<<<<<< HEAD
         <td><%= premium.subline_id %></td>
         <td><%= premium.peril_id %></td>
+=======
+        <td><%= premium.sublinename %></td>
+        <td><%= premium.perilname %></td>
+>>>>>>> cj
         <td><%= premium.subline_factor %></td>
         <td><%= premium.coverage_limit %></td>
         <td><%= premium.coverage_duration %></td>
@@ -30,12 +39,27 @@
         <td><%= premium.taxed %></td>
         <td><%= link_to 'Show', premium %></td>
         <td><%= link_to 'Edit', edit_premium_path(premium) %></td>
+<<<<<<< HEAD
         <td><%= link_to 'Destroy', premium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+=======
+        <!-- <td><%#= link_to 'Destroy', premium, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+>>>>>>> cj
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<<<<<<< HEAD
 <br>
 
 <%= link_to 'New Premium', new_premium_path %>
+=======
+
+<%= link_to 'New Premium', new_premium_path %>
+
+<h2>Import Premiums</h2>
+<%= form_tag import_premiums_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+>>>>>>> cj

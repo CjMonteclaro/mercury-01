@@ -13,6 +13,7 @@ end
 
 puts "Generating Sublines ..."
 
+<<<<<<< HEAD
 ["PC", "CV", "MC", "LTO"].each do |policy_type|
   case policy_type
   when "PC"
@@ -30,6 +31,18 @@ puts "Generating Sublines ..."
       Subline.find_or_create_by(line_id: 1, name: subline, policy_type: policy_type)
     end
   end
+=======
+["PC", "CV", "MC", "LTO"].each do |subline|
+  sl = Subline.find_or_create_by(shortname: subline)
+  sl.name = case subline
+  when "PC" then "Private Car"
+  when "CV" then "Commercial Vehicle"
+  when "MC" then "Motorcycle"
+  when "LTO" then "Land Tranportation Operator's"
+  end
+  sl.line_id = 1
+  sl.save!
+>>>>>>> cj
 end
 
 puts "Generating Perils ..."
@@ -52,6 +65,7 @@ puts "Generating Perils ..."
   pr.save!
 end
 
+<<<<<<< HEAD
 puts "Generating Charges table ..."
 
 ct = [
@@ -68,4 +82,6 @@ ct.each do |n, s, r, t|
 end
 
 
+=======
+>>>>>>> cj
 puts "Done!"

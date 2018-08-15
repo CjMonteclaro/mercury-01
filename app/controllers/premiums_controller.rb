@@ -12,6 +12,14 @@ class PremiumsController < ApplicationController
   def show
   end
 
+<<<<<<< HEAD
+=======
+  def import
+    Premium.import(params[:file])
+    redirect_to premiums_path, notice: 'Premiums imported.'
+  end
+
+>>>>>>> cj
   # GET /premiums/new
   def new
     @premium = Premium.new
