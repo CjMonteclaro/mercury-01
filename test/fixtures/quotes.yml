@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subline_id: 1
+  peril_id: 1
+  premium_id: 1
+  coverage_limit: 9.99
+  coverage_duration: 1
+  base_prem: 9.99
+  total_charges: 9.99
+  gross_prem: 9.99
+
+two:
+  subline_id: 1
+  peril_id: 1
+  premium_id: 1
+  coverage_limit: 9.99
+  coverage_duration: 1
+  base_prem: 9.99
+  total_charges: 9.99
+  gross_prem: 9.99

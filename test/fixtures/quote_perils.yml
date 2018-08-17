@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quote_id: 1
+  peril_id: 1
+  policy_id: 1
+  sum_insured: 9.99
+  premium: 9.99
+
+two:
+  quote_id: 1
+  peril_id: 1
+  policy_id: 1
+  sum_insured: 9.99
+  premium: 9.99

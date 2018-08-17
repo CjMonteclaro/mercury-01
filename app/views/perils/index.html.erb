@@ -2,9 +2,10 @@
 
 <h1>Perils</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Line</th>
       <th>Name</th>
       <th>Shortname</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @perils.each do |peril| %>
       <tr>
+        <td><%= peril.id %></td>
         <td><%= peril.line_id %></td>
         <td><%= peril.name %></td>
         <td><%= peril.shortname %></td>
@@ -24,7 +26,6 @@
         <td><%= peril.to %></td>
         <td><%= link_to 'Show', peril %></td>
         <td><%= link_to 'Edit', edit_peril_path(peril) %></td>
-        <td><%= link_to 'Destroy', peril, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

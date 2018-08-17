@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814110425) do
+ActiveRecord::Schema.define(version: 20180816024055) do
 
   create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "charge_type_id"
@@ -61,17 +61,35 @@ ActiveRecord::Schema.define(version: 20180814110425) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quotes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "subline_id"
+    t.integer "peril_id"
+    t.integer "premium_id"
+    t.decimal "coverage_limit", precision: 10
+    t.integer "coverage_duration"
+    t.decimal "base_prem", precision: 10
+    t.decimal "total_charges", precision: 10
+    t.decimal "gross_prem", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sublines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "line_id"
     t.string "name"
-<<<<<<< HEAD
     t.string "policy_type"
     t.integer "creator_id"
-=======
-    t.string "shortname"
->>>>>>> cj
     t.date "from"
     t.date "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "username"
+    t.string "email"
+    t.boolean "email_opt_in"
+    t.boolean "enabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

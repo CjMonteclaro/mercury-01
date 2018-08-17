@@ -66,5 +66,5 @@ ct.each do |n, s, r, t|
   charge = ChargeType.find_or_create_by(name: n, shortname: s)
   charge.charge_rates.find_or_create_by(rate: r, rate_type: t) if r.present?
 end
-
+end
 puts "Done!"

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :quotes
+  resources :users
   resources :charge_rates
   resources :charge_types
   resources :premiums

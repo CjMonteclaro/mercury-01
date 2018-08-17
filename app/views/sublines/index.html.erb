@@ -2,12 +2,13 @@
 
 <h1>Sublines</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Line</th>
       <th>Name</th>
-      <th>Shortname</th>
+      <th>Policy Type</th>
       <th>From</th>
       <th>To</th>
       <th colspan="3"></th>
@@ -17,14 +18,14 @@
   <tbody>
     <% @sublines.each do |subline| %>
       <tr>
+        <td><%= subline.id %></td>
         <td><%= subline.line_id %></td>
         <td><%= subline.name %></td>
-        <td><%= subline.shortname %></td>
+        <td><%= subline.policy_type %></td>
         <td><%= subline.from %></td>
         <td><%= subline.to %></td>
         <td><%= link_to 'Show', subline %></td>
         <td><%= link_to 'Edit', edit_subline_path(subline) %></td>
-        <td><%= link_to 'Destroy', subline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
