@@ -6,5 +6,5 @@ class GiisAssured < ApplicationRecord
   self.primary_key = "assd_no"
 
   has_many :gicl_claims, foreign_key: :assd_no
-
+  has_many :gipi_polbasics, foreign_key: :assd_no
 end

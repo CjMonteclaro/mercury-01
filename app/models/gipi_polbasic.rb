@@ -6,11 +6,25 @@ class GipiPolbasic < ApplicationRecord
   self.primary_key = "policy_id"
 
   alias_attribute :id, :policy_id
-  alias_attribute :inception, :incept_date
-  alias_attribute :expiry, :expiry_date
-  alias_attribute :effectivity, :eff_date
-  alias_attribute :issued, :issue_date
   alias_attribute :source, :iss_cd
   alias_attribute :sequence_no, :pol_seq_no
+
+  belongs_to :giis_assured, foreign_key: :assd_no
+
+  has_one :gipi_comm_invoice, foreign_key: :policy_id
+  has_one :giis_intermediary, through: :gipi_comm_invoice, foreign_key: :intm_no
+
+  def no
+    "#{line_cd}-#{subline_cd}-#{source}-#{issue_yy}-#{proper_seq_no}-#{proper_renew_number}"
+  end
+
+  def proper_seq_no
+    sprintf '%07d', sequence_no
+  end
+
+  def proper_renew_number
+    sprintf '%02d', renew_no
+  end
+
 
 end

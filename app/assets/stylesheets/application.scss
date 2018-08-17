@@ -1,0 +1,19 @@
+/*
+*= require jquery-ui
+*= require jquery-ui/datepicker
+ */
+@import "bootstrap";
+@import 'jquery-ui/datepicker';
+
+ body {
+   font-size: 0.85rem !important;
+ }
+
+ .table-borderless > tbody > tr > td,
+ .table-borderless > tbody > tr > th,
+ .table-borderless > tfoot > tr > td,
+ .table-borderless > tfoot > tr > th,
+ .table-borderless > thead > tr > td,
+ .table-borderless > thead > tr > th {
+     border: none;
+ }

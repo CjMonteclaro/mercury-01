@@ -1,0 +1,40 @@
+require 'axlsx'
+xlsx_package = Axlsx::Package.new
+
+wb = xlsx_package.workbook
+  wb.add_worksheet(name: "Claims") do |sheet|
+
+    sheet.add_row ["ASSURED",
+                  "CLAIM NUMBER",
+                  "POLICY NUMBER",
+                  "BROKERS/AGENTS",
+                  "LOSS CATEGORY",
+                  "BRIEF DIAGNOSIS",
+                  "EFFECTIVITY DATE",
+                  " ",
+                  "DATE OF LOSS",
+                  "INTERVAL PERIOD IN MONTHS (Policy Effectivity to Date of Loss)",
+                  "DATE REPORTED",
+                  "TAT (Working Days)",
+                  "TAT (Calendar Days)"
+                  ]
+
+    sheet.merge_cells("G1:H1")
+
+    @claims.each do |claim|
+      sheet.add_row [claim.assured_name,
+                    claim.no,
+                    claim.polbasic&.no,
+                    claim.polbasic&.giis_intermediary&.name,
+                    claim.loss_category,
+                    claim.loss_dtls,
+                    claim.effectivity_date,
+                    claim.expiry_date,
+                    claim.loss_date,
+                    claim.months_between(claim.effectivity_date, claim.loss_date),
+                    claim.date_reported,
+                    claim.business_days_between(claim.loss_date, claim.date_reported),
+                    claim.calendar_dates(claim.loss_date, claim.date_reported)
+                    ]
+  end
+end

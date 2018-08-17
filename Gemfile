@@ -57,6 +57,15 @@ gem 'ruby-oci8'
 gem 'activerecord-oracle_enhanced-adapter'
 gem 'ar-octopus', :git => "git://github.com/tchandy/octopus.git", :require => "octopus"
 
+gem 'ransack'
 gem 'simple_form'
 gem 'bootstrap', '~> 4.1.1'
 gem 'bootstrap4-datetime-picker-rails'
+gem 'kaminari'
+
+gem 'jquery-rails'
+gem 'jquery-ui-rails' , '~> 5.0.5'
+
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'

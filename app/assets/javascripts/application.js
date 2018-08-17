@@ -11,5 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
+//= require jquery-ui
+//= require jquery-ui/datepicker
 //= require turbolinks
-//= require_tree .
+//= require_tree.
+
+$(function() {
+    $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
+});

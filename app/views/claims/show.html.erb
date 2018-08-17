@@ -1,2 +1,80 @@
-<h1>Claims#show</h1>
-<p>Find me in app/views/claims/show.html.erb</p>
+<p></p>
+<h3 class="text-center form-group">Claim Details</h3>
+
+  <div class="row form-group">
+    <%= content_tag :div, 'Assured:', class: 'col-md-1' %>
+    <%= content_tag :div, @claim.assured_name, class: 'col-md-6' %>
+    <div class="col-md-2">
+      <%= content_tag :p, 'Claim Number:' %>
+      <%= content_tag :p, 'Policy Number:' %>
+    </div>
+    <div class="col-md-3">
+      <%= content_tag :p, @claim.no %>
+      <%= content_tag :p, @claim.polbasic.no %>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <%= content_tag :div, 'Agent/Broker:', class: 'col-md-2' %>
+    <%= content_tag :div, "#{@claim.polbasic.giis_intermediary.name} (#{@claim.polbasic.giis_intermediary.no})", class: 'col-md-6' %>
+  </div>
+
+  <div class="row form-group">
+    <%= content_tag :div, 'Claims Processor:', class: 'col-md-2' %>
+    <%= content_tag :div, @claim.user_id, class: 'col-md-6' %>
+  </div>
+
+  <div class="row form-group">
+      <%= content_tag :div, 'Loss Category:', class: 'col-md-2' %>
+      <%= content_tag :div, @claim.loss_category, class: 'col-md-6' %>
+
+      <%# @claim.giis_perils.where(line_cd: @claim.line_cd).each do |peril| %>
+        <%#= content_tag :div, peril.name, class: 'col-md-6' %>
+      <%# end %>
+  </div>
+
+  <div class="row form-group">
+    <%= content_tag :div, 'Brief Diagnosis:', class: 'col-md-2'  if  @claim.loss_dtls %>
+    <%= content_tag :div, @claim.loss_dtls, class: 'col-md-6' %>
+  </div>
+
+  <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
+    <div class="row form-group">
+      <% loss_exp.giis_payee_classes.where(class_code: loss_exp.class_code).each do |payee_class| %>
+        <%= content_tag :div, "#{payee_class.description.titleize}:", class: 'col-md-2' unless payee_class.class_code == "1" %>
+      <% end %>
+      <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
+        <%= content_tag :div, payee.name, class: 'col-md-6' unless payee.class_code == "1" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <table class="table table-bordered">
+    <thead class="text-center">
+      <th colspan="2">Effectivity Date</th>
+      <%= content_tag :th, 'Date of Loss' %>
+      <%= content_tag :th, 'Date Reported' %>
+    </thead>
+    <tbody class="text-center">
+      <tr>
+        <%= content_tag :td, format_date(@claim.effectivity_date) %>
+        <%= content_tag :td, format_date(@claim.expiry_date) %>
+        <%= content_tag :td, format_date(@claim.loss_date) %>
+        <%= content_tag :td, format_date(@claim.date_reported) %>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row form-group">
+    <%= content_tag :div, 'Interval Period (Policy Effectivity to Date of Loss):', class: 'col-md-4' %>
+    <%= content_tag :div, "#{@claim.months_between(@claim.effectivity_date, @claim.loss_date)} Month/s" %>
+  </div>
+  <div class="row form-group">
+    <%= content_tag :div, 'Turn Around Time (Date of Loss to Date Reported):', class: 'col-md-4' %>
+    <div>
+      <%= content_tag :p, "#{@claim.calendar_dates(@claim.loss_date, @claim.date_reported)} Calendar Days" %>
+      <%= content_tag :p, "#{@claim.business_days_between(@claim.loss_date, @claim.date_reported)} Working Days" %>
+    </div>
+  </div>
+
+<%= link_to 'Back', url_for(:back), class: 'btn btn-danger float-right' %>

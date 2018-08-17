@@ -1,0 +1,19 @@
+<div class="container form-group">
+    <%= search_form_for @q, builder: SimpleForm::FormBuilder, url: claims_index_path, html: { class: 'form-inline' } do |f| %>
+      <div class="px-2 py-1 bg-secondary mr-sm-2 rounded">
+        <%= f.search_field :line_code_cont, placeholder: "Line", class: 'form-control mr-sm-1', :maxlength => 2, :size => 2 %>
+        <%= f.search_field :subline_code_cont, placeholder: "Subline", class: 'form-control mr-sm-1', :maxlength => 7, :size => 7 %>
+        <%= f.search_field :source_cont, placeholder: "Branch", class: 'form-control mr-sm-1', :maxlength => 2, :size => 4 %>
+        <%= f.search_field :claim_year_eq, placeholder: "Year", class: 'form-control mr-sm-1', :maxlength => 2, :size => 2 %>
+        <%= f.search_field :sequence_number_eq, placeholder: "Sequence", class: 'form-control', :maxlength => 7, :size => 7 %>
+      </div>
+      <div class="px-2 py-1 bg-secondary mr-sm-2 rounded">
+        <%= f.search_field :assured_name_cont, placeholder: "Assured", class: 'form-control', :size => 7 %>
+      </div>
+      <div class="px-2 py-1 bg-secondary mr-sm-2 rounded">
+        <%= f.text_field :loss_date_gteq, :id => "datepicker1", placeholder: "From", class: 'form-control mr-sm-1', :size => 7 %>
+        <%= f.text_field :loss_date_lteq, :id => "datepicker2", placeholder: "To", class: 'form-control', :size => 7 %>
+      </div>
+      <%= f.submit "Search", class: 'btn btn-primary' %>
+    <% end %>
+</div>

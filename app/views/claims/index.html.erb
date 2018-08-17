@@ -1,8 +1,13 @@
+<p></p>
+
 <h1>Claims</h1>
 
-<table class="table">
-  <thead>
-    <%= content_tag :th, 'Claim ID' %>
+<%= render 'ransack' %>
+
+<table class="table table-hover">
+  <thead class="success">
+    <%= content_tag :th, 'Claim Number' %>
+    <%= content_tag :th, 'Policy Number' %>
     <%= content_tag :th, 'Assured' %>
     <%= content_tag :th, 'Date of Loss' %>
   </thead>
@@ -10,17 +15,17 @@
   <tbody>
     <% @claims.each do |claim| %>
     <tr>
-      <td>
-        <%= content_tag :p, "ID: #{claim.claim_id}" %>
-        <%= content_tag :p, "ID: #{claim.no}" %>
-      </td>
-      <td>
-        <%= content_tag :p, claim.assd_no %>
-        <%= content_tag :p, claim.giis_assured.assd_name %>
-      </td>
-
-      <%= content_tag :td, claim.loss_date %>
+      <%= content_tag :td, claim.no %>
+      <%= content_tag :td, claim.polbasic.no unless claim.polbasic.nil? %>
+      <%= content_tag :td, "#{claim.assured_name} (#{claim.assd_no})" %>
+      <%= content_tag :td, format_date(claim.loss_date) %>
+      <td><%= link_to 'Show Details', claims_show_path(id: claim.claim_id), class: 'btn btn-info' %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Download Excel', claims_index_path(request.parameters.merge(format: :xlsx)), class: 'btn btn-success float-right' %>
+
+<%= page_entries_info @claims, entry_name: 'claims' %><br>
+<%= paginate @claims %>
