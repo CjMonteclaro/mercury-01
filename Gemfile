@@ -56,7 +56,7 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'ruby-oci8', require: 'oci8'
 gem 'activerecord-oracle_enhanced-adapter'
-gem 'ar-octopus', :git => "git://github.com/tchandy/octopus.git", :require => "octopus"
+gem 'ar-octopus', git: "git://github.com/tchandy/octopus.git", require: "octopus"
 
 gem 'simple_form'
 gem 'bootstrap', '~> 4.1.1'

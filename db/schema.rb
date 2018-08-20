@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180820034100) do
+ActiveRecord::Schema.define(version: 20180817092007) do
 
   create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "charge_type_id"
@@ -63,17 +63,14 @@ ActiveRecord::Schema.define(version: 20180820034100) do
 
   create_table "quote_perils", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "quote_id"
+    t.integer "subline_id"
     t.integer "peril_id"
-    t.integer "policy_id"
-    t.decimal "sum_insured", precision: 10
-    t.decimal "premium", precision: 10
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quote_premiums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "quote_id"
     t.integer "premium_id"
+    t.decimal "sum_insured", precision: 12, scale: 2
+    t.decimal "base_prem", precision: 12, scale: 2
+    t.decimal "total_charges", precision: 12, scale: 2
+    t.decimal "gross_prem", precision: 12, scale: 2
+    t.integer "policy_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,11 +79,11 @@ ActiveRecord::Schema.define(version: 20180820034100) do
     t.integer "subline_id"
     t.integer "peril_id"
     t.integer "premium_id"
-    t.decimal "coverage_limit", precision: 10
+    t.decimal "coverage_limit", precision: 12, scale: 2
     t.integer "coverage_duration"
-    t.decimal "base_prem", precision: 10
-    t.decimal "total_charges", precision: 10
-    t.decimal "gross_prem", precision: 10
+    t.decimal "base_prem", precision: 12, scale: 2
+    t.decimal "total_charges", precision: 12, scale: 2
+    t.decimal "gross_prem", precision: 12, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

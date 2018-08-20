@@ -10,7 +10,7 @@ class QuotesController < ApplicationController
 
   def new
     @quote = Quote.new
-    @quote.perils.build
+    @quote_perils = @quote.perils.build
   end
 
   def edit
@@ -21,6 +21,7 @@ class QuotesController < ApplicationController
 
     respond_to do |format|
       if @quote.save
+        @quote.compute_premium
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: @quote }
       else
@@ -33,6 +34,7 @@ class QuotesController < ApplicationController
   def update
     respond_to do |format|
       if @quote.update(quote_params)
+        @quote.compute_premium
         format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
         format.json { render :show, status: :ok, location: @quote }
       else
@@ -56,7 +58,7 @@ class QuotesController < ApplicationController
     end
 
     def quote_params
-      params.require(:quote).permit(:subline_id, :peril_id, :premium_id, :coverage_limit, :coverage_duration, :base_prem, :total_charges, :gross_prem, 
-        quote_perils_attributes: [:id, :line_id, :name, :shortname, :from, :to, :_destroy]) 
+      params.require(:quote).permit(:subline_id, :peril_id, :premium_id, :coverage_limit, :coverage_duration, :base_prem, :total_charges, :gross_prem,
+        quote_perils_attributes: [:id, :quote_id, :peril_id, :sum_insured, :premium, :_destroy])
     end
 end
