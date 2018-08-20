@@ -2,7 +2,8 @@ class Premium < ApplicationRecord
 
   has_many :sublines
   has_many :perils
-  has_many :quotes
+  has_many :quote_premiums
+  has_many :quotes, through: :quote_premiums
 
 
   def self.import(file)

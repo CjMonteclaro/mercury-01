@@ -22,7 +22,11 @@
       </thead>
       <tbody>
       <tr>
-        <td><%= @quote.peril.name %></td>
+        <td>
+          <% @quote.perils.each do |peril|%>
+            <%= content_tag :p, peril.name %>
+          <% end %>  
+        </td>
         <td><%= @quote.coverage_limit %></td>
         <td><%= @quote.coverage_duration %></td>
         <td><%= @quote.base_prem %></td>

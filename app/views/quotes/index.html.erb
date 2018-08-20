@@ -7,7 +7,7 @@
     <tr>
       <th>ID</th>
       <th>Subline</th>
-      <th>Peril</th>
+      <th>Perils</th>
       <th>Premium</th>
       <th>Coverage limit</th>
       <th>Coverage duration</th>
@@ -23,7 +23,11 @@
       <tr>
         <td><%= quote.id %></td>
         <td><%= quote.subline.policy_type %></td>
-        <td><%= quote.peril.name %></td>
+        <td>
+          <% quote.perils.each do |peril|%>
+            <%= content_tag :p, peril.name %>
+          <% end %>  
+        </td>
         <td><%= quote.premium_id %></td>
         <td><%= quote.coverage_limit %></td>
         <td><%= quote.coverage_duration %></td>
