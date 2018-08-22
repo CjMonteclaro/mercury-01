@@ -1,0 +1,73 @@
+require 'axlsx'
+xlsx_package = Axlsx::Package.new
+
+wb = xlsx_package.workbook
+  wb.add_worksheet(name: "PAYEE - SHOP") do |sheet|
+
+    sheet.add_row [
+                  "SHOP",
+                  "ASSURED",
+                  "CLAIM NUMBER",
+                  "POLICY NUMBER",
+                  "CLAIM STATUS",
+                  "BROKERS/AGENTS",
+                  "LOSS CATEGORY",
+                  "BRIEF DIAGNOSIS",
+                  "EFFECTIVITY DATE",
+                  " ",
+                  "DATE OF LOSS",
+                  "INTERVAL PERIOD IN MONTHS (Policy Effectivity to Date of Loss)",
+                  "DATE REPORTED",
+                  "TAT (Working Days)",
+                  "TAT (Calendar Days)",
+                  "NAME OF ADJUSTER",
+                  "COST"
+                  ]
+
+    sheet.merge_cells("I1:J1")
+
+    @claims.each do |claim|
+      @assured_name     = claim.assured_name
+      @claim_number     = claim.no
+      @policy           = claim.polbasic&.no
+      @status           = claim.giis_clm_stat.description
+      @intermediary_name = claim.polbasic&.giis_intermediary&.name
+      @loss_category    = claim.loss_category
+      @loss_details     = claim.loss_dtls
+      @effectivity_date = claim.effectivity_date
+      @expiry_date      = claim.expiry_date
+      @loss_date        = claim.loss_date
+      @months_between   = claim.months_between(claim.effectivity_date, claim.loss_date)
+      @date_reported    = claim.date_reported
+      @business_days    = claim.business_days_between(claim.loss_date, claim.date_reported)
+      @calendar_dates   = claim.calendar_dates(claim.loss_date, claim.date_reported)
+      @adjuster         = claim.adjuster
+      @cost             = format_currency(claim.cost)
+
+      claim.gicl_clm_loss_exps.each do |loss_exp|
+        loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee|
+          @shop = payee.name
+        end
+      end
+            sheet.add_row [
+                        @shop,
+                        @assured_name,
+                        @claim_number,
+                        @policy,
+                        @status,
+                        @intermediary_name,
+                        @loss_category,
+                        @loss_details,
+                        @effectivity_date,
+                        @expiry_date,
+                        @loss_date,
+                        @months_between,
+                        @date_reported,
+                        @business_days,
+                        @calendar_dates,
+                        @adjuster,
+                        @cost
+                        ]
+        @shop = nil
+    end
+  end

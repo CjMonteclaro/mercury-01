@@ -21,7 +21,14 @@
 
   <div class="row form-group">
     <%= content_tag :div, 'Claims Processor:', class: 'col-md-2' %>
-    <%= content_tag :div, @claim.user_id, class: 'col-md-6' %>
+    <%= content_tag :div, @claim.user_id, class: 'col-md-5' %>
+    <%= content_tag :div, 'Name of Adjuster:', class: 'col-md-2' %>
+    <%= content_tag :div, @claim.adjuster, class: 'col-md-3' %>
+  </div>
+
+  <div class="row form-group">
+    <%= content_tag :div, 'Claims Status:', class: 'col-md-2' %>
+    <%= content_tag :div, @claim.giis_clm_stat.description, class: 'col-md-6' %>
   </div>
 
   <div class="row form-group">
@@ -38,14 +45,17 @@
     <%= content_tag :div, @claim.loss_dtls, class: 'col-md-6' %>
   </div>
 
-  <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
+  <!-- payee class code 5 for motorshop -->
+  <% @claim.gicl_clm_loss_exps.where(class_code: "5").each do |loss_exp| %>
     <div class="row form-group">
-      <% loss_exp.giis_payee_classes.where(class_code: loss_exp.class_code).each do |payee_class| %>
-        <%= content_tag :div, "#{payee_class.description.titleize}:", class: 'col-md-2' unless payee_class.class_code == "1" %>
-      <% end %>
       <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
-        <%= content_tag :div, payee.name, class: 'col-md-6' unless payee.class_code == "1" %>
+        <% payee.giis_payee_classes.each do |payee_class| %>
+          <%= content_tag :div, "#{payee_class.description.titleize}:", class: 'col-md-2'%>
+        <% end %>
+        <%= content_tag :div, payee.name, class: 'col-md-6' %>
       <% end %>
+      <%= content_tag :div, 'Cost:', class: 'col-md-1'  if  @claim.cost %>
+      <%= content_tag :div, format_currency(@claim.cost), class: 'col-md-2' %>
     </div>
   <% end %>
 

@@ -25,7 +25,7 @@
   </tbody>
 </table>
 
-<%= link_to 'Download Excel', claims_index_path(request.parameters.merge(format: :xlsx)), class: 'btn btn-success float-right' %>
+<%= link_to 'Download Excel', claims_index_path(request.parameters.merge(format: :xlsx)), target: :_blank, class: 'btn btn-success float-right' %>
 
 <%= page_entries_info @claims, entry_name: 'claims' %><br>
 <%= paginate @claims %>

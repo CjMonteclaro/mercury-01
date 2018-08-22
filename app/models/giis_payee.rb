@@ -8,10 +8,12 @@ class GiisPayee < ApplicationRecord
   alias_attribute :no, :payee_no
   alias_attribute :class_code, :payee_class_cd
 
+  has_many :giac_chk_disbursements, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
   has_many :giis_payee_classes, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
+  
   belongs_to :gicl_clm_loss_exp, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
 
   def name
-    "#{payee_first_name} #{payee_middle_name} #{payee_last_name}"
+      "#{payee_last_name} #{payee_first_name} #{payee_middle_name}"
   end
 end

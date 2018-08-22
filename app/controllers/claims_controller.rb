@@ -6,7 +6,7 @@ class ClaimsController < ApplicationController
 
     respond_to do |format|
       format.html{@claims = @q.result.order(loss_date: :desc).page(params[:page])}
-      format.xlsx{ render xlsx: 'ClaimsTAT' }
+      format.xlsx{ render xlsx: 'CLAIMS_TAT' }
     end
   end
 

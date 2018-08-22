@@ -1,16 +1,16 @@
-wb = xlsx_package.workbook
-wb.add_worksheet(name: "Claims") do |sheet|
-  sheet.add_row ["Claim Number", "Policy Number"]
-
-  @claims.each do |claim|
-    claim.giis_perils.where(line_cd: claim.line_cd).each do |peril|
-    claim.gicl_clm_loss_exps.each do |loss_exp|
-      loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee|
-
-    sheet.add_row [claim.no, claim.polbasic.no, claim.giis_assured.assd_name, claim.polbasic.giis_intermediary.name, peril.name, claim.loss_dtls, payee.name, claim.effectivity_date, claim.expiry_date, claim.loss_date, claim.date_reported, claim.months_between(claim.effectivity_date, claim.loss_date)
-    ]
-      end
-    end
-    end
-  end
-end
+<div class="row form-group">
+  <div class="col-md-10">
+    <% @claim.gicl_clm_loss_exps.where(class_code: "5").each do |loss_exp| %>
+    <div class="col-md-2">
+      <% loss_exp.giis_payee_classes.each do |payee_class| %>
+      <%= "#{payee_class.description.titleize}:" %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
+      <%= content_tag :p, "#{payee.name} (#{payee.no})" %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
