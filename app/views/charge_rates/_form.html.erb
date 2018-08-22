@@ -4,10 +4,10 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :charge_type_id %>
+    <%= f.association :charge_type %>
     <%= f.input :qualifier %>
     <%= f.input :rate %>
-    <%= f.input :rate_type %>
+    <%= f.input :rate_type, as: :select, collection: ["percentage","currency"] %>
   </div>
 
   <div class="form-actions">

@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg py-4">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <%#= link_to image_tag('fgen_logo.png', id: "fgen_logo", class: "#{params[:controller]} ml-3 mr-3"), "http://fgeninsurance.com", target: :_blank %>
+  <%# link_to "FGen Travel Insurance", root_path, class:'navbar-brand' %>
+
+  <%= content_tag :span, "Motor App", class: 'navbar-brand mb-0 h1 text-primary' %>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="nav-item dropdown mr-5">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Admin
+      </a>
+      <div class="dropdown-menu mr-2" aria-labelledby="navbarDropdownMenuLink">
+        <%= drop_link('Lines', lines_path) %>
+        <%= drop_link('Sublines', sublines_path) %>
+        <%= drop_link('Perils', perils_path) %>
+        <div class="dropdown-divider"></div>
+        <%= drop_link('Premium Table', premiums_path) %>
+
+      </div>
+    </li>
+
+    <%= nav_link('New Quote', new_quote_path) %>
+  </ul>
+  </div>
+
+</nav>

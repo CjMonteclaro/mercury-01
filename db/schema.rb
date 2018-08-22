@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180817092007) do
+ActiveRecord::Schema.define(version: 20180822063213) do
 
   create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "charge_type_id"
@@ -61,22 +61,25 @@ ActiveRecord::Schema.define(version: 20180817092007) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quote_charges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "quote_id"
+    t.integer "charge_rate_id"
+    t.integer "charge_type_id"
+    t.decimal "charge_amount", precision: 12, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "quote_perils", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "quote_id"
     t.integer "subline_id"
     t.integer "peril_id"
-<<<<<<< HEAD
-    t.integer "policy_id"
-    t.decimal "sum_insured", precision: 10
-    t.decimal "premium", precision: 10
-=======
     t.integer "premium_id"
     t.decimal "sum_insured", precision: 12, scale: 2
     t.decimal "base_prem", precision: 12, scale: 2
     t.decimal "total_charges", precision: 12, scale: 2
     t.decimal "gross_prem", precision: 12, scale: 2
     t.integer "policy_id"
->>>>>>> 8e8a55ad04795635bde8f1da48bb8644de13cb5c
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
