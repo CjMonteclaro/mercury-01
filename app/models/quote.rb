@@ -1,11 +1,11 @@
 class Quote < ApplicationRecord
 
-	belongs_to :subline
+	belongs_to :subline, optional: true
 	belongs_to :premium
 
 	has_many :quote_perils
 	accepts_nested_attributes_for :quote_perils, allow_destroy: true
-	
+
 	has_many :perils, through: :quote_perils
 
 	before_save :compute_premium
@@ -15,10 +15,10 @@ class Quote < ApplicationRecord
 		self.quote_perils.each do | qp |
 			premium_table = Premium.where(subline_id: self.subline_id, peril_id: self.peril_id).first
 
-			net_premium = 
+			net_premium =
 				case premium_table.prem_type
 					when 'FIXED' then premium_table.premium
-					when 'PERCENTAGE' then (self.coverage_limit * (premium_table.premium / 100))	
+					when 'PERCENTAGE' then (self.coverage_limit * (premium_table.premium / 100))
 				end
 
 			dst = ((net_premium/4) * 0.50)
@@ -37,8 +37,8 @@ class Quote < ApplicationRecord
 			gross = net_premium + total_charges
 
 			# self.premium_id = prem.id
-			qp.sum_insured = if premium_table.coverage_limit.present? 
-								premium_table.coverage_limit 
+			qp.sum_insured = if premium_table.coverage_limit.present?
+								premium_table.coverage_limit
 							 else
 							 	self.coverage_limit
 							 end

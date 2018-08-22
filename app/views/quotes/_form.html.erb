@@ -11,9 +11,9 @@
     <%#= f.input :premium_id, as: :hidden, required: false, input_html: {value: '1'} %>
     
 
-    <%= f.input :coverage_limit, wrapper_html: { class: 'form-group col-sm-6' }, input_html: {class: 'form-control'} %>
+    <%= f.input :coverage_limit, wrapper_html: { class: 'col-sm-6' } %>
 
-    <%= f.input :coverage_duration, wrapper_html: { class: 'form-group col-sm-6' }, input_html: {class: 'form-control', value: '1'} %>
+    <%= f.input :coverage_duration, wrapper_html: { class: 'col-sm-6' }, input_html: { value: '1'} %>
 
     <%#= f.input :base_prem, as: :hidden, required: false, input_html: {value: '1'} %>
 
@@ -34,6 +34,7 @@
   <div class="form-actions py-3 mx-3">
     <p><%= link_to_add_association 'Add Peril', f, :quote_perils, class: 'btn btn-primary text-white', data: { association_insertion_node: '.perils', association_insertion_method: :append } %></p>
     <%= f.submit 'Get Quote', class: 'btn btn-primary' %>
-    <%= link_to 'Back', quotes_path, class: 'btn btn-secondary text-white pt-2' if params[:action] == 'new'%>
+    <%= link_to 'Back', quotes_path, class: 'btn btn-secondary text-white pt-2' %> 
+     <!-- if params[:action] == 'new' -->
   </div>
 <% end %>

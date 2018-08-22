@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180820034100) do
+ActiveRecord::Schema.define(version: 20180817092007) do
 
   create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "charge_type_id"
@@ -67,13 +67,6 @@ ActiveRecord::Schema.define(version: 20180820034100) do
     t.integer "policy_id"
     t.decimal "sum_insured", precision: 10
     t.decimal "premium", precision: 10
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quote_premiums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "quote_id"
-    t.integer "premium_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

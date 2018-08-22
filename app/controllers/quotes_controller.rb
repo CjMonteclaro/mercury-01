@@ -57,6 +57,6 @@ class QuotesController < ApplicationController
 
     def quote_params
       params.require(:quote).permit(:subline_id, :peril_id, :premium_id, :coverage_limit, :coverage_duration, :base_prem, :total_charges, :gross_prem, 
-        quote_perils_attributes: [:id, :line_id, :name, :shortname, :from, :to, :_destroy]) 
+        quote_perils_attributes: [:id, :line_id, :peril_id, :name, :shortname, :from, :to, :_destroy]) 
     end
 end

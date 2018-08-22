@@ -1,5 +1,5 @@
 <tr class="nested-fields">
-  <td class="w-25"><%= f.input :peril_id, label: false, as: :select %></td> 
+  <td class="w-25"><%= f.association :peril, label: false, as: :select %></td>
   <!-- , as: :select, collection: Peril.all.collect(&:shortname) -->
   <td>
     <%= link_to_remove_association "remove peril", f, class: 'btn btn-primary btn-sm text-white' %>

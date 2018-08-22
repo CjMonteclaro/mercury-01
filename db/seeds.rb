@@ -26,7 +26,7 @@ puts "Generating Sublines ..."
   when "MC"
     Subline.find_or_create_by(line_id: 1, name: "Motorcycle", policy_type: policy_type)
   when "LTO"
-    ["Touris Car", "Taxi, PUJ, Minibus", "Public Bus, Tourist Bus"].each do |subline|
+    ["Tourist Car", "Taxi, PUJ, Minibus", "Public Bus, Tourist Bus", "Tricycle"].each do |subline|
       Subline.find_or_create_by(line_id: 1, name: subline, policy_type: policy_type)
     end
   end
