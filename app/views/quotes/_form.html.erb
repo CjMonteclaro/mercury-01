@@ -1,40 +1,33 @@
 
 <%= simple_form_for(@quote) do |f| %>
+
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div>
+  <div class="row">
 
-    <%= f.association :subline, wrapper_html: { class: 'col-sm-6' } %>
+    <div class="col-sm-6">
+      <%= f.association :subline, label: 'Vehicle Type' %>
+      <%= f.input :coverage_limit %>
+      <%# f.input :coverage_duration, wrapper_html: { class: 'col-sm-6' }, input_html: { value: '1'} %>
+    </div>
 
+    <div class="col-sm-6 perils">
+      <%= f.simple_fields_for :quote_perils do |builder| %>
+        <%= render 'quote_peril_fields', f: builder %>
+      <% end %>
 
-    <%#= f.input :premium_id, as: :hidden, required: false, input_html: {value: '1'} %>
-    
+      <div class="links text-right">
+        <%= link_to_add_association 'Add Peril', f, :quote_perils, class: 'btn btn-primary text-white' %>
+      </div>
+    </div>
 
-    <%= f.input :coverage_limit, wrapper_html: { class: 'col-sm-6' } %>
-
-    <%= f.input :coverage_duration, wrapper_html: { class: 'col-sm-6' }, input_html: { value: '1'} %>
-
-    <%#= f.input :base_prem, as: :hidden, required: false, input_html: {value: '1'} %>
-
-    <%#= f.input :total_charges, as: :hidden, required: false, input_html: {value: '1'} %>
-
-    <%#= f.input :gross_prem, as: :hidden, required: false, input_html: {value: '1'} %>
-    
-
-    <table>    
-      <tbody class='perils'>
-        <%= f.simple_fields_for :quote_perils do |builder| %>
-          <%= render 'quote_peril_fields', f: builder %>
-        <% end %>
-      </tbody>
-    </table>
   </div>
 
-  <div class="form-actions py-3 mx-3">
-    <p><%= link_to_add_association 'Add Peril', f, :quote_perils, class: 'btn btn-primary text-white', data: { association_insertion_node: '.perils', association_insertion_method: :append } %></p>
+  <hr>
+  <div class="form-actions text-right">
     <%= f.submit 'Get Quote', class: 'btn btn-primary' %>
-    <%= link_to 'Back', quotes_path, class: 'btn btn-secondary text-white pt-2' %> 
-     <!-- if params[:action] == 'new' -->
+    <%= link_to 'Back', quotes_path, class: 'btn btn-secondary text-white pt-2' %>
   </div>
+
 <% end %>
