@@ -2,8 +2,8 @@ class ChargeRate < ApplicationRecord
   belongs_to :charge_type
   has_many :quote_charges
 
-  def vat
-    self.where(charge_type: 1).rate
+  def self.vat
+    self.find_by(charge_type: 1).rate
   end
 
   def dst
