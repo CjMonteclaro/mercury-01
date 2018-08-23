@@ -20,53 +20,41 @@ class Quote < ApplicationRecord
 	  self.coverage_duration = 1
 	end
 
-	def compute_premium
+	def compute_base_premium
 
-		net_premium = self.quote_perils.sum(&:base_prem)
+		update(base_prem: self.quote_perils.sum(&:base_prem))
 
-		perils = self.perils.collect(&:shortname)
-		peril_count = self.perils.count
+		# perils = self.perils.collect(&:shortname)
+		# peril_count = self.perils.count
 
-		ChargeRate.all.each do |charge_rate|
+		# self.quote_charges.each do |qc|
 
-			if perils.include?('CTPL') && peril_count == 1
-				next if charge_rate.charge_type_id == 1 || charge_rate.charge_type_id == 2 || charge_rate.charge_type_id == 3 || charge_rate.charge_type_id == 4
-			elsif perils.include?('CTPL') && peril_count > 1
-				#Add all charges
-			else
-				next if charge_rate.charge_type_id == 5 || charge_rate.charge_type_id == 6
-			end
+		# 	# if perils.include?('CTPL') && peril_count == 1
+		# 	# 	next if qc.charge_type_id == 1 || qc.charge_type_id == 2 || qc.charge_type_id == 3 || charge_rate.charge_type_id == 4
+		# 	# elsif perils.include?('CTPL') && peril_count > 1
+		# 	# 	#Add all charges
+		# 	# else
+		# 	# 	next if qc.charge_type_id == 5 || qc.charge_type_id == 6
+		# 	# end
 
-			# qc = QuoteCharge.find_or_initialize_by(quote_id: self.id, charge_type_id: charge_rate.charge_type.id)
+		# 	charge_rate_ids.each do |rate_id|
+ 	# 			qc.charge_rate_id	<< rate_id
+		# 	end
+		# end
 
-			#  if charge_rate.rate_type == 'percentage'
-			# 	 qc.charge_amount = net_premium * (charge_rate.rate/100)
-			#  else
-			# 	 qc.charge_amount = charge_rate.rate
-			#  end
 
-			#  qc.charge_rate_id = charge_rate.id
-			#  self.quote_charges << qc
+	end
 
-			# if charge_rate.rate_type == 'percentage'
-			# 	 self.quote_charges.charge_amount = net_premium * (charge_rate.rate/100)
-			# else
-			# 	 self.quote_charges.charge_amount = charge_rate.rate
-			# end
-
-			 # self.quote_charges.charge_rate_id = charge_rate.id
-			 # self.quote_charges << qc
+	def compute_charges_and_gross_prem
+		quote_charges.each do |qc|
+			qc.compute_charge_amount
 		end
+		total_charges = quote_charges.sum(&:charge_amount)
+		update(total_charges: total_charges, gross_prem: base_prem + total_charges)
+	end
 
-		total_charges = self.quote_charges.sum(&:charge_amount)
-
-		gross = net_premium + total_charges
-
-		self.update(
-			base_prem: net_premium,
-			total_charges: total_charges,
-			gross_prem: gross
-		)
+	def compute_gross_prem
+		# update(gross_prem: base_prem + total_charges)
 	end
 
 end

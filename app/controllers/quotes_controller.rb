@@ -11,7 +11,7 @@ class QuotesController < ApplicationController
   def new
     @quote = Quote.new
     @quote_perils = @quote.perils.build
-    @quote_charges = @quote.charge_rates.build
+    # @quote_charges = @quote.charge_rates.build
   end
 
   def edit
@@ -22,7 +22,8 @@ class QuotesController < ApplicationController
 
     respond_to do |format|
       if @quote.save
-        @quote.compute_premium
+        @quote.compute_base_premium
+        @quote.compute_charges_and_gross_prem
         format.html { redirect_to @quote, notice: 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: @quote }
       else
@@ -35,8 +36,9 @@ class QuotesController < ApplicationController
   def update
     respond_to do |format|
       if @quote.update(quote_params)
-        @quote.compute_premium
-        format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
+        @quote.compute_base_premium
+        @quote.compute_charges_and_gross_prem
+      format.html { redirect_to @quote, notice: 'Quote was successfully updated.' }
         format.json { render :show, status: :ok, location: @quote }
       else
         format.html { render :edit }
@@ -62,7 +64,7 @@ class QuotesController < ApplicationController
       params.require(:quote).permit(:subline_id, :peril_id, :premium_id, :coverage_limit, :coverage_duration, :base_prem, :total_charges, :gross_prem,
         quote_perils_attributes: [:id, :quote_id, :peril_id, :sum_insured, :premium, :_destroy],
         quote_charges: [:id, :quote_id, :charge_rate_id, :charge_type_id, :charge_amount, :_destroy],
-        charge_rates: [:id, :charge_type_id, :qualifier, :rate, :rate_type, :_destroy]
+        charge_rate_ids: []
         )
     end
 end
