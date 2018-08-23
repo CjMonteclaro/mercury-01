@@ -14,50 +14,74 @@
     </div>
   </div>
 
-  <div class="row form-group">
-    <%= content_tag :div, 'Agent/Broker:', class: 'col-md-2' %>
-    <%= content_tag :div, "#{@claim.polbasic.giis_intermediary.name} (#{@claim.polbasic.giis_intermediary.no})", class: 'col-md-6' %>
-  </div>
-
-  <div class="row form-group">
-    <%= content_tag :div, 'Claims Processor:', class: 'col-md-2' %>
-    <%= content_tag :div, @claim.user_id, class: 'col-md-5' %>
-    <%= content_tag :div, 'Name of Adjuster:', class: 'col-md-2' %>
-    <%= content_tag :div, @claim.adjuster, class: 'col-md-3' %>
-  </div>
-
-  <div class="row form-group">
-    <%= content_tag :div, 'Claims Status:', class: 'col-md-2' %>
-    <%= content_tag :div, @claim.giis_clm_stat.description, class: 'col-md-6' %>
-  </div>
-
-  <div class="row form-group">
-      <%= content_tag :div, 'Loss Category:', class: 'col-md-2' %>
-      <%= content_tag :div, @claim.loss_category, class: 'col-md-6' %>
-
-      <%# @claim.giis_perils.where(line_cd: @claim.line_cd).each do |peril| %>
-        <%#= content_tag :div, peril.name, class: 'col-md-6' %>
-      <%# end %>
-  </div>
-
-  <div class="row form-group">
-    <%= content_tag :div, 'Brief Diagnosis:', class: 'col-md-2'  if  @claim.loss_dtls %>
-    <%= content_tag :div, @claim.loss_dtls, class: 'col-md-6' %>
-  </div>
-
-  <!-- payee class code 5 for motorshop -->
-  <% @claim.gicl_clm_loss_exps.where(class_code: "5").each do |loss_exp| %>
+  <div class="float-left col-md-8">
     <div class="row form-group">
-      <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
-        <% payee.giis_payee_classes.each do |payee_class| %>
-          <%= content_tag :div, "#{payee_class.description.titleize}:", class: 'col-md-2'%>
-        <% end %>
-        <%= content_tag :div, payee.name, class: 'col-md-6' %>
-      <% end %>
-      <%= content_tag :div, 'Cost:', class: 'col-md-1'  if  @claim.cost %>
-      <%= content_tag :div, format_currency(@claim.cost), class: 'col-md-2' %>
+      <%= content_tag :div, 'Agent/Broker:', class: 'col-md-2' %>
+      <%= content_tag :div, "#{@claim.polbasic.giis_intermediary.name} (#{@claim.polbasic.giis_intermediary.no})", class: 'col-md-6' %>
     </div>
-  <% end %>
+
+    <div class="row form-group">
+      <%= content_tag :div, 'Claims Processor:', class: 'col-md-2' %>
+      <%= content_tag :div, @claim.user_id, class: 'col-md-6' %>
+    </div>
+
+    <div class="row form-group">
+      <%= content_tag :div, 'Claims Status:', class: 'col-md-2' %>
+      <%= content_tag :div, @claim.giis_clm_stat.description, class: 'col-md-6' %>
+    </div>
+
+    <div class="row form-group">
+        <%= content_tag :div, 'Loss Category:', class: 'col-md-2' %>
+        <%= content_tag :div, @claim.loss_category, class: 'col-md-6' %>
+
+        <%# @claim.giis_perils.where(line_cd: @claim.line_cd).each do |peril| %>
+          <%#= content_tag :div, peril.name, class: 'col-md-6' %>
+        <%# end %>
+    </div>
+
+    <div class="row form-group">
+      <%= content_tag :div, 'Brief Diagnosis:', class: 'col-md-2'  if  @claim.loss_dtls %>
+      <%= content_tag :div, @claim.loss_dtls, class: 'col-md-6' %>
+    </div>
+
+    <!-- payee class code 5 for motorshop -->
+    <% @claim.gicl_clm_loss_exps.where(class_code: "5").each do |loss_exp| %>
+      <div class="row form-group">
+        <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
+          <% payee.giis_payee_classes.each do |payee_class| %>
+            <%= content_tag :div, "#{payee_class.description.titleize}:", class: 'col-md-2'%>
+          <% end %>
+          <%= content_tag :div, payee.name, class: 'col-md-6' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="float-right col-md-4">
+    <div class="row form-group">
+      <%= content_tag :div, 'Name of Adjuster:', class: 'col-md-5' %>
+      <%= content_tag :div, @claim.adjuster, class: 'col-md-4' %>
+    </div>
+    <div class="row form-group">
+      <%= content_tag :div, 'Cost:', class: 'col-md-5'  if  @claim.cost %>
+      <%= content_tag :div, format_currency(@claim.cost), class: 'col-md-4' %>
+    </div>
+    <div class="row form-group">
+      <% @claim.giac_direct_claim_payts.each do |payment| %>
+      <% @disbursement = payment.giac_chk_disbursement %>
+        <%= content_tag :div, 'Check No:', class: 'col-md-5'  if  @disbursement.check_number %>
+        <%= content_tag :div, @disbursement.check_number, class: 'col-md-4' %>
+    </div>
+    <div class="row form-group">
+        <%= content_tag :div, 'Check Prepared:', class: 'col-md-5'  if  @disbursement.check_date %>
+        <%= content_tag :div, format_date(@disbursement.check_date), class: 'col-md-4' %>
+    </div>
+    <div class="row form-group">
+        <%= content_tag :div, 'Check Prepared:', class: 'col-md-5'  if  @disbursement.check_release_date %>
+        <%= content_tag :div, format_date(@disbursement.check_release_date) unless @disbursement.check_release_date.nil? %>
+      <% end %>
+    </div>
+  </div>
 
   <table class="table table-bordered">
     <thead class="text-center">

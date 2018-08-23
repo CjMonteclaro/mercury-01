@@ -21,7 +21,10 @@ wb = xlsx_package.workbook
                   "TAT (Working Days)",
                   "TAT (Calendar Days)",
                   "NAME OF ADJUSTER",
-                  "COST"
+                  "COST",
+                  "CHECK NUMBER",
+                  "DATE CHECK PREPARED",
+                  "CHECK RELEASE",
                   ]
 
     sheet.merge_cells("I1:J1")
@@ -49,6 +52,12 @@ wb = xlsx_package.workbook
           @shop = payee.name
         end
       end
+
+      claim.giac_direct_claim_payts.each do |payment|
+        @check_number    =  payment.giac_chk_disbursement.check_number
+        @check_date      =  payment.giac_chk_disbursement.check_date
+        @check_release_date = payment.giac_chk_disbursement.check_release_date unless payment.giac_chk_disbursement.check_release_date.nil?
+      end
             sheet.add_row [
                         @shop,
                         @assured_name,
@@ -66,8 +75,14 @@ wb = xlsx_package.workbook
                         @business_days,
                         @calendar_dates,
                         @adjuster,
-                        @cost
+                        @cost,
+                        @check_number,
+                        @check_date,
+                        @check_release_date
                         ]
         @shop = nil
+        @check_number    =  nil
+        @check_date      =  nil
+        @check_release_date  =  nil
     end
   end
