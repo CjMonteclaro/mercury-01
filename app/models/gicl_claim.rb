@@ -28,6 +28,7 @@ class GiclClaim < ApplicationRecord
   has_many :gicl_clm_loss_exps, foreign_key: :claim_id
   has_many :giac_direct_claim_payts, foreign_key: :claim_id
 
+  has_many :giac_chk_release_infos, through: :giac_direct_claim_payts, foreign_key: :gacc_tran_id
   has_many :giis_perils, through: :gicl_item_perils, foreign_key: :peril_cd, primary_key: :peril_cd
   has_many :giis_payees, through: :gicl_clm_loss_exps, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
   has_many :giis_payee_classes, through: :gicl_clm_loss_exps, foreign_key: :payee_class_cd, primary_key: :payee_class_cd

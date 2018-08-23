@@ -65,21 +65,26 @@
       <%= content_tag :div, 'Cost:', class: 'col-md-5'  if  @claim.cost %>
       <%= content_tag :div, format_currency(@claim.cost), class: 'col-md-4' %>
     </div>
-    <div class="row form-group">
-      <% @claim.giac_direct_claim_payts.each do |payment| %>
-      <% @disbursement = payment.giac_chk_disbursement %>
-        <%= content_tag :div, 'Check No:', class: 'col-md-5' unless @disbursement.nil? %>
-        <%= content_tag :div, @disbursement.check_number, class: 'col-md-4' unless @disbursement.nil? %>
-    </div>
-    <div class="row form-group">
-        <%= content_tag :div, 'Check Prepared:', class: 'col-md-5' unless @disbursement.nil? %>
-        <%= content_tag :div, format_date(@disbursement.check_date), class: 'col-md-4' unless @disbursement.nil? %>
-    </div>
-    <div class="row form-group">
-        <%= content_tag :div, 'Check Release:', class: 'col-md-5' unless @disbursement.nil? %>
-        <%= content_tag :div, format_date(@disbursement.check_release_date), class: 'col-md-4' unless @disbursement.nil? %>
+
+    <% @claim.giac_direct_claim_payts.each do |payment| %>
+      <% payment.giac_chk_disbursements.each do |disbursement| %>
+        <div class="row form-group">
+          <%= content_tag :div, 'Check No:', class: 'col-md-5' unless disbursement.nil? %>
+          <%= content_tag :div, disbursement.check_number, class: 'col-md-4' unless disbursement.nil? %>
+        </div>
+        <div class="row form-group">
+          <%= content_tag :div, 'Check Prepared:', class: 'col-md-5' unless disbursement.nil? %>
+          <%= content_tag :div, format_date(disbursement.check_date), class: 'col-md-4' unless disbursement.nil? %>
+        </div>
       <% end %>
-    </div>
+      <div class="row form-group">
+        <% payment.giac_chk_release_infos.each do |check_info| %>
+          <%= content_tag :div, 'Check Release:', class: 'col-md-5' unless check_info.nil? %>
+          <%= content_tag :div, format_date(check_info.check_release_date), class: 'col-md-4' unless check_info.nil? %>
+        <% end %>
+      </div>
+    <% end %>
+
   </div>
 
   <table class="table table-bordered">

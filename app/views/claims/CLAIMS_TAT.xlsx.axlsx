@@ -25,13 +25,13 @@ wb.styles do |style|
                   "TAT (Calendar Days)",
                   "NAME OF ADJUSTER",
                   "COST",
-                  "CHECK NUMBER",
                   "DATE CHECK PREPARED",
+                  "CHECK NUMBER",
                   "CHECK RELEASE",
                   ],
     style: [center,center,center,center,center,center,center,nil,center,center,center,center,center,center,center,center,center,center,center]
 
-    sheet.merge_cells("J1:K1")
+    sheet.merge_cells("I1:J1")
 
     @claims.each do |claim|
       @assured_name     = claim.assured_name
@@ -58,10 +58,13 @@ wb.styles do |style|
       end
 
       claim.giac_direct_claim_payts.each do |payment|
-        @disbursement    =  payment.giac_chk_disbursement
-        @check_number    =  @disbursement.check_number unless @disbursement.nil?
-        @check_date      =  @disbursement.check_date unless @disbursement.nil?
-        @check_release_date = @disbursement.check_release_date unless @disbursement.nil?
+        payment.giac_chk_disbursements.each do |disbursement|
+          @check_date      = disbursement.check_date unless disbursement.nil?
+          @check_number    = disbursement.check_number unless disbursement.nil?
+        end
+        payment.giac_chk_release_infos.each do |check_info|
+          @check_release_date = check_info.check_release_date unless check_info.nil?
+        end
       end
             sheet.add_row [
                         @payee,
@@ -81,15 +84,15 @@ wb.styles do |style|
                         @calendar_dates,
                         @adjuster,
                         @cost,
-                        @check_number,
                         @check_date,
+                        @check_number,
                         @check_release_date
                         ],
             style: [nil,nil,nil,nil,center,nil,center,nil,nil,nil,nil,center,nil,center,center,center,number_format,right]
 
         @payee          = nil
-        @check_number   = nil
         @check_date     = nil
+        @check_number   = nil
         @check_release_date  =  nil
     end
   end

@@ -6,5 +6,6 @@ class GiacDirectClaimPayt < ApplicationRecord
   self.primary_key = "gacc_tran_id"
 
   belongs_to :gicl_claim, foreign_key: :claim_id, primary_key: :claim_id
-  has_one :giac_chk_disbursement, foreign_key: :gacc_tran_id
+  has_many :giac_chk_disbursements, foreign_key: :gacc_tran_id
+  has_many :giac_chk_release_infos, foreign_key: :gacc_tran_id
 end
