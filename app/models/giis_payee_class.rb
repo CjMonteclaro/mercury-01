@@ -8,5 +8,5 @@ class GiisPayeeClass < ApplicationRecord
   alias_attribute :description, :class_desc
 
   belongs_to :giis_payee, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
-  # belongs_to :gicl_clm_loss_exp, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
+  belongs_to :gicl_clm_loss_exp, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
 end

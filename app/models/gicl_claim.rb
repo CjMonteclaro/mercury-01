@@ -30,6 +30,7 @@ class GiclClaim < ApplicationRecord
 
   has_many :giis_perils, through: :gicl_item_perils, foreign_key: :peril_cd, primary_key: :peril_cd
   has_many :giis_payees, through: :gicl_clm_loss_exps, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
+  has_many :giis_payee_classes, through: :gicl_clm_loss_exps, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
 
   belongs_to :giis_assured, foreign_key: :assd_no
 

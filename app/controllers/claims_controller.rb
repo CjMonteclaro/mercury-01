@@ -2,7 +2,7 @@ class ClaimsController < ApplicationController
 
   def index
       @q = GiclClaim.search(params[:q])
-      @claims = @q.result
+      @claims = @q.result.includes(:gicl_clm_loss_exps)
 
     respond_to do |format|
       format.html{@claims = @q.result.order(loss_date: :desc).page(params[:page])}

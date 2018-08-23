@@ -9,5 +9,5 @@ class GiclClmLossExp < ApplicationRecord
 
   belongs_to :gicl_claim, foreign_key: :claim_id
   has_many :giis_payees, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
-  # has_many :giis_payee_classes, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
+  has_many :giis_payee_classes, foreign_key: :payee_class_cd, primary_key: :payee_class_cd
 end

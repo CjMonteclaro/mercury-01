@@ -16,8 +16,8 @@
 
   <div class="float-left col-md-8">
     <div class="row form-group">
-      <%= content_tag :div, 'Agent/Broker:', class: 'col-md-2' %>
-      <%= content_tag :div, "#{@claim.polbasic.giis_intermediary.name} (#{@claim.polbasic.giis_intermediary.no})", class: 'col-md-6' %>
+      <%= content_tag :div, 'Agent/Broker:', class: 'col-md-2' unless @claim.polbasic.giis_intermediary.nil? %>
+      <%= content_tag :div, "#{@claim.polbasic.giis_intermediary.name} (#{@claim.polbasic.giis_intermediary.no})", class: 'col-md-6' unless @claim.polbasic.giis_intermediary.nil? %>
     </div>
 
     <div class="row form-group">
@@ -40,16 +40,15 @@
     </div>
 
     <div class="row form-group">
-      <%= content_tag :div, 'Brief Diagnosis:', class: 'col-md-2'  if  @claim.loss_dtls %>
+      <%= content_tag :div, 'Diagnosis:', class: 'col-md-2'  if  @claim.loss_dtls %>
       <%= content_tag :div, @claim.loss_dtls, class: 'col-md-6' %>
     </div>
 
-    <!-- payee class code 5 for motorshop -->
-    <% @claim.gicl_clm_loss_exps.where(class_code: "5").each do |loss_exp| %>
+    <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
       <div class="row form-group">
         <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
           <% payee.giis_payee_classes.each do |payee_class| %>
-            <%= content_tag :div, "#{payee_class.description.titleize}:", class: 'col-md-2'%>
+            <%= content_tag :div, "Payee #{payee_class.description.titleize}:", class: 'col-md-2'%>
           <% end %>
           <%= content_tag :div, payee.name, class: 'col-md-6' %>
         <% end %>
@@ -69,16 +68,16 @@
     <div class="row form-group">
       <% @claim.giac_direct_claim_payts.each do |payment| %>
       <% @disbursement = payment.giac_chk_disbursement %>
-        <%= content_tag :div, 'Check No:', class: 'col-md-5'  if  @disbursement.check_number %>
-        <%= content_tag :div, @disbursement.check_number  unless @disbursement.nil? %>
+        <%= content_tag :div, 'Check No:', class: 'col-md-5' unless @disbursement.nil? %>
+        <%= content_tag :div, @disbursement.check_number, class: 'col-md-4' unless @disbursement.nil? %>
     </div>
     <div class="row form-group">
-        <%= content_tag :div, 'Check Prepared:', class: 'col-md-5'  if  @disbursement.check_date %>
-        <%= content_tag :div, format_date(@disbursement.check_date) unless @disbursement.check_date.nil? %>
+        <%= content_tag :div, 'Check Prepared:', class: 'col-md-5' unless @disbursement.nil? %>
+        <%= content_tag :div, format_date(@disbursement.check_date), class: 'col-md-4' unless @disbursement.nil? %>
     </div>
     <div class="row form-group">
-        <%= content_tag :div, 'Check Prepared:', class: 'col-md-5'  if  @disbursement.check_release_date %>
-        <%= content_tag :div, format_date(@disbursement.check_release_date) unless @disbursement.check_release_date.nil? %>
+        <%= content_tag :div, 'Check Release:', class: 'col-md-5' unless @disbursement.nil? %>
+        <%= content_tag :div, format_date(@disbursement.check_release_date), class: 'col-md-4' unless @disbursement.nil? %>
       <% end %>
     </div>
   </div>

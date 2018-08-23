@@ -9,6 +9,7 @@
     <%= content_tag :th, 'Claim Number' %>
     <%= content_tag :th, 'Policy Number' %>
     <%= content_tag :th, 'Assured' %>
+    <%#= content_tag :th, 'Payee Class' %>
     <%= content_tag :th, 'Date of Loss' %>
   </thead>
 
@@ -18,7 +19,16 @@
       <%= content_tag :td, claim.no %>
       <%= content_tag :td, claim.polbasic.no unless claim.polbasic.nil? %>
       <%= content_tag :td, "#{claim.assured_name} (#{claim.assd_no})" %>
-      <%= content_tag :td, format_date(claim.loss_date) %>
+      <!-- <td>
+        <%# claim.gicl_clm_loss_exps.each do |loss_exp| %>
+          <%# loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
+            <%# payee.giis_payee_classes.each do |payee_class| %>
+              <%#= payee_class.description %>
+            <%# end %>
+          <%# end %>
+        <%# end %>
+      </td> -->
+      <td><%= format_date(claim.loss_date) %></td>
       <td><%= link_to 'Show Details', claims_show_path(id: claim.claim_id), class: 'btn btn-info' %></td>
     </tr>
     <% end %>
