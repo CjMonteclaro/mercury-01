@@ -9,6 +9,8 @@
     <div class="col-sm-6">
       <%= f.association :subline, label: 'Vehicle Type' %>
       <%= f.input :coverage_limit %>
+      <%= f.association :charge_rates, as: :check_boxes, label_method: :shortname %>
+
     </div>
 
     <div class="col-sm-6 perils">

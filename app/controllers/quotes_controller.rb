@@ -11,6 +11,7 @@ class QuotesController < ApplicationController
   def new
     @quote = Quote.new
     @quote_perils = @quote.perils.build
+    @quote_charges = @quote.charge_rates.build
   end
 
   def edit
@@ -59,6 +60,9 @@ class QuotesController < ApplicationController
 
     def quote_params
       params.require(:quote).permit(:subline_id, :peril_id, :premium_id, :coverage_limit, :coverage_duration, :base_prem, :total_charges, :gross_prem,
-        quote_perils_attributes: [:id, :quote_id, :peril_id, :sum_insured, :premium, :_destroy])
+        quote_perils_attributes: [:id, :quote_id, :peril_id, :sum_insured, :premium, :_destroy],
+        quote_charges: [:id, :quote_id, :charge_rate_id, :charge_type_id, :charge_amount, :_destroy],
+        charge_rates: [:id, :charge_type_id, :qualifier, :rate, :rate_type, :_destroy]
+        )
     end
 end

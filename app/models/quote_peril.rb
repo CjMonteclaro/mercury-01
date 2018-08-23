@@ -2,8 +2,6 @@ class QuotePeril < ApplicationRecord
 
 	belongs_to :quote
 	belongs_to :peril, optional: true
-	has_many :quote_peril_charges
-	has_many :charge_rates, through: :quote_peril_charges
 
 	before_save :compute_premium
 
