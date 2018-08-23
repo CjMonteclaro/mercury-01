@@ -71,6 +71,6 @@ class GiclClaim < ApplicationRecord
   end
 
   def cost
-    self.loss_res_amt * 1.12
+    (self.loss_res_amt * 1.12).round(2) if self.loss_res_amt
   end
 end

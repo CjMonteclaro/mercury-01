@@ -70,11 +70,11 @@
       <% @claim.giac_direct_claim_payts.each do |payment| %>
       <% @disbursement = payment.giac_chk_disbursement %>
         <%= content_tag :div, 'Check No:', class: 'col-md-5'  if  @disbursement.check_number %>
-        <%= content_tag :div, @disbursement.check_number, class: 'col-md-4' %>
+        <%= content_tag :div, @disbursement.check_number  unless @disbursement.nil? %>
     </div>
     <div class="row form-group">
         <%= content_tag :div, 'Check Prepared:', class: 'col-md-5'  if  @disbursement.check_date %>
-        <%= content_tag :div, format_date(@disbursement.check_date), class: 'col-md-4' %>
+        <%= content_tag :div, format_date(@disbursement.check_date) unless @disbursement.check_date.nil? %>
     </div>
     <div class="row form-group">
         <%= content_tag :div, 'Check Prepared:', class: 'col-md-5'  if  @disbursement.check_release_date %>

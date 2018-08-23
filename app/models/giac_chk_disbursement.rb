@@ -8,6 +8,6 @@ class GiacChkDisbursement < ApplicationRecord
   belongs_to :giac_chk_disbursement, foreign_key: :gacc_tran_id
 
   def check_number
-    "#{check_pref_suf}-#{check_no}"
+      "#{check_pref_suf}-#{check_no}"
   end
 end

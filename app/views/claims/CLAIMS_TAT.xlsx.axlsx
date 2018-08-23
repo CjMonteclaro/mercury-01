@@ -2,8 +2,9 @@ require 'axlsx'
 xlsx_package = Axlsx::Package.new
 
 wb = xlsx_package.workbook
+wb.styles do |style|
   wb.add_worksheet(name: "PAYEE - SHOP") do |sheet|
-
+  number_format = style.add_style(num_fmt: 4)
     sheet.add_row [
                   "SHOP",
                   "ASSURED",
@@ -45,7 +46,7 @@ wb = xlsx_package.workbook
       @business_days    = claim.business_days_between(claim.loss_date, claim.date_reported)
       @calendar_dates   = claim.calendar_dates(claim.loss_date, claim.date_reported)
       @adjuster         = claim.adjuster
-      @cost             = format_currency(claim.cost)
+      @cost             = claim.cost
 
       claim.gicl_clm_loss_exps.each do |loss_exp|
         loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee|
@@ -54,9 +55,10 @@ wb = xlsx_package.workbook
       end
 
       claim.giac_direct_claim_payts.each do |payment|
-        @check_number    =  payment.giac_chk_disbursement.check_number
-        @check_date      =  payment.giac_chk_disbursement.check_date
-        @check_release_date = payment.giac_chk_disbursement.check_release_date unless payment.giac_chk_disbursement.check_release_date.nil?
+        @disbursement    =  payment.giac_chk_disbursement
+        @check_number    =  @disbursement.check_number unless @disbursement.nil?
+        @check_date      =  @disbursement.check_date unless @disbursement.nil?
+        @check_release_date = @disbursement.check_release_date unless @disbursement.nil?
       end
             sheet.add_row [
                         @shop,
@@ -79,10 +81,12 @@ wb = xlsx_package.workbook
                         @check_number,
                         @check_date,
                         @check_release_date
-                        ]
+                        ],
+            style: [nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,number_format]
         @shop = nil
         @check_number    =  nil
         @check_date      =  nil
         @check_release_date  =  nil
     end
   end
+end

@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def format_currency(amount)
-    number_to_currency(amount, unit: "")
+    number_to_currency(amount, unit: "") #if amount.present?
   end
 end
