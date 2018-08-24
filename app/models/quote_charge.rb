@@ -7,7 +7,7 @@ class QuoteCharge < ApplicationRecord
 
   def populate
     self.charge_type_id = self.charge_rate.charge_type_id
-    self.charge_type_id = self.charge_rate.id
+    self.charge_rate_id = self.charge_rate.id
   end
 
   def compute_charge_amount

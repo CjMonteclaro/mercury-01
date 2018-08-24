@@ -22,7 +22,9 @@ class Quote < ApplicationRecord
 
 	def compute_base_premium
 
-		update(base_prem: self.quote_perils.sum(&:base_prem))
+		update(base_prem: self.quote_perils.sum(&:base_prem),
+					 coverage_limit: self.quote_perils.collect(&:sum_insured).max
+					)
 
 		# perils = self.perils.collect(&:shortname)
 		# peril_count = self.perils.count

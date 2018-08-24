@@ -10,7 +10,12 @@ class QuotesController < ApplicationController
 
   def new
     @quote = Quote.new
-    @quote_perils = @quote.perils.build
+
+    [1, 2].each do |peril|
+      @quote.quote_perils.build(peril_id: peril)
+    end
+      # @quote.quote_perils.build
+
     # @quote_charges = @quote.charge_rates.build
   end
 
