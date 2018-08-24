@@ -1,0 +1,22 @@
+
+
+<% @claims_by_year.sort.each do |year, claims| %>
+  <h2 class="bg-primary"><%= year.strftime('%Y') %></h2>
+  <%= format_currency(claims.map{|c| c.get_loss_payment }.sum) %>
+  <% for claim in claims %>
+    <div class="claim">
+      <strong><%= claim.claim_id %></strong>
+      @ <%= claim.loss_date.to_date.to_s(:long) %>
+      @ <%= format_currency claim.loss_pd_amt %><br>
+
+      <% claim.disbursements.group_by { |d| d.last_update.beginning_of_year }.sort.each do |year2, disbursements| %>
+        <%= content_tag :p, year2.strftime('%Y'), class: 'bg-warning' %>
+        <% disbursements.each do |disbursement| %>
+        Check Date <%= format_date disbursement.check_date %>
+        Check Amt <%= content_tag :strong, format_currency(disbursement.amount)  %><br>
+        <% end %>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>

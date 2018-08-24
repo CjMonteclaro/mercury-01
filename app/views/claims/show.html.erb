@@ -44,7 +44,7 @@
       <%= content_tag :div, @claim.loss_dtls, class: 'col-md-6' %>
     </div>
 
-    <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
+    <% @claim.gicl_clm_loss_exps.where(hist_seq_no: @claim.gicl_clm_loss_exps.collect(&:hist_seq_no).last).each do |loss_exp| %>
       <div class="row form-group">
         <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
           <% payee.giis_payee_classes.each do |payee_class| %>

@@ -3,10 +3,11 @@ xlsx_package = Axlsx::Package.new
 
 wb = xlsx_package.workbook
 wb.styles do |style|
-  wb.add_worksheet(name: "PAYEE") do |sheet|
   number_format = style.add_style(num_fmt: 4)
+  date_format = style.add_style(num_fmt: 14)
   center = style.add_style(alignment: { horizontal: :center })
   right = style.add_style(alignment: { horizontal: :right })
+  wb.add_worksheet(name: "PAYEE") do |sheet|
     sheet.add_row [
                   "PAYEE",
                   "ASSURED",
@@ -28,8 +29,9 @@ wb.styles do |style|
                   "DATE CHECK PREPARED",
                   "CHECK NUMBER",
                   "CHECK RELEASE",
+                  "TAT (Loss Date to Check Release)"
                   ],
-    style: [center,center,center,center,center,center,center,nil,center,center,center,center,center,center,center,center,center,center,center]
+    style: [center,center,center,center,center,center,center,nil,center,center,center,center,center,center,center,center,center,center,center,center]
 
     sheet.merge_cells("I1:J1")
 
@@ -86,7 +88,8 @@ wb.styles do |style|
                         @cost,
                         @check_date,
                         @check_number,
-                        @check_release_date
+                        @check_release_date,
+                        "=NETWORKDAYS(K,T,HOLIDAYS!$A$1:$A$53)"
                         ],
             style: [nil,nil,nil,nil,center,nil,center,nil,nil,nil,nil,center,nil,center,center,center,number_format,right]
 
@@ -95,5 +98,61 @@ wb.styles do |style|
         @check_number   = nil
         @check_release_date  =  nil
     end
+  end
+
+  wb.add_worksheet(name: "HOLIDAYS") do |sheet|
+      sheet.add_row ["1/1/2016"], style: [date_format]
+      sheet.add_row ["1/2/2016"], style: [date_format]
+      sheet.add_row ["2/8/2016"], style: [date_format]
+      sheet.add_row ["2/25/2016"], style: [date_format]
+      sheet.add_row ["3/24/2016"], style: [date_format]
+      sheet.add_row ["3/25/2016"], style: [date_format]
+      sheet.add_row ["3/26/2016"], style: [date_format]
+      sheet.add_row ["4/9/2016"], style: [date_format]
+      sheet.add_row ["5/1/2016"], style: [date_format]
+      sheet.add_row ["6/12/2016"], style: [date_format]
+      sheet.add_row ["7/6/2016"], style: [date_format]
+      sheet.add_row ["8/21/2016"], style: [date_format]
+      sheet.add_row ["8/29/2016"], style: [date_format]
+      sheet.add_row ["9/12/2016"], style: [date_format]
+      sheet.add_row ["10/31/2016"], style: [date_format]
+      sheet.add_row ["11/1/2016"], style: [date_format]
+      sheet.add_row ["11/30/2016"], style: [date_format]
+      sheet.add_row ["12/24/2016"], style: [date_format]
+      sheet.add_row ["12/25/2016"], style: [date_format]
+      sheet.add_row ["12/30/2016"], style: [date_format]
+      sheet.add_row ["12/31/2016"], style: [date_format]
+      sheet.add_row ["1/1/2017"], style: [date_format]
+      sheet.add_row ["1/2/2017"], style: [date_format]
+      sheet.add_row ["2/25/2017"], style: [date_format]
+      sheet.add_row ["4/9/2017"], style: [date_format]
+      sheet.add_row ["4/13/2017"], style: [date_format]
+      sheet.add_row ["4/14/2017"], style: [date_format]
+      sheet.add_row ["4/15/2017"], style: [date_format]
+      sheet.add_row ["4/28/2017"], style: [date_format]
+      sheet.add_row ["5/1/2017"], style: [date_format]
+      sheet.add_row ["6/12/2017"], style: [date_format]
+      sheet.add_row ["8/28/2017"], style: [date_format]
+      sheet.add_row ["8/21/2017"], style: [date_format]
+      sheet.add_row ["10/31/2017"], style: [date_format]
+      sheet.add_row ["11/1/2017"], style: [date_format]
+      sheet.add_row ["11/30/2017"], style: [date_format]
+      sheet.add_row ["12/25/2017"], style: [date_format]
+      sheet.add_row ["12/30/2017"], style: [date_format]
+      sheet.add_row ["12/31/2017"], style: [date_format]
+      sheet.add_row ["1/1/2018"], style: [date_format]
+      sheet.add_row ["2/16/2018"], style: [date_format]
+      sheet.add_row ["3/29/2018"], style: [date_format]
+      sheet.add_row ["3/30/2018"], style: [date_format]
+      sheet.add_row ["3/31/2018"], style: [date_format]
+      sheet.add_row ["4/1/2018"], style: [date_format]
+      sheet.add_row ["4/9/2018"], style: [date_format]
+      sheet.add_row ["5/1/2018"], style: [date_format]
+      sheet.add_row ["5/14/2018"], style: [date_format]
+      sheet.add_row ["6/12/2018"], style: [date_format]
+      sheet.add_row ["6/15/2018"], style: [date_format]
+      sheet.add_row ["7/2/2018"], style: [date_format]
+      sheet.add_row ["8/21/2018"], style: [date_format]
+      sheet.add_row ["8/27/2018"], style: [date_format]
   end
 end

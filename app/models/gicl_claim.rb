@@ -25,8 +25,8 @@ class GiclClaim < ApplicationRecord
   has_one :giis_clm_stat, foreign_key: :clm_stat_cd, primary_key: :clm_stat_cd
 
   has_many :gicl_item_perils, foreign_key: :claim_id
-  has_many :gicl_clm_loss_exps, foreign_key: :claim_id
   has_many :giac_direct_claim_payts, foreign_key: :claim_id
+  has_many :gicl_clm_loss_exps, foreign_key: :claim_id
 
   has_many :giac_chk_release_infos, through: :giac_direct_claim_payts, foreign_key: :gacc_tran_id
   has_many :giis_perils, through: :gicl_item_perils, foreign_key: :peril_cd, primary_key: :peril_cd
@@ -74,5 +74,19 @@ class GiclClaim < ApplicationRecord
 
   def cost
     (self.loss_res_amt * 1.12).round(2) if self.loss_res_amt
+  end
+
+  ######
+
+  def get_loss_payment
+    if self.loss_pd_amt.present?
+      self.loss_pd_amt
+    else
+      0
+    end
+  end
+
+  def disbursements
+    GiacChkDisbursement.where(gacc_tran_id: self.giac_direct_claim_payts.collect(&:gacc_tran_id))
   end
 end
