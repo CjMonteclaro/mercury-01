@@ -21,6 +21,7 @@ class GiclClaim < ApplicationRecord
   alias_attribute :status, :clm_stat_cd
   alias_attribute :adjuster, :in_hou_adj
 
+  has_one :claims_tat, foreign_key: :genweb_claim_id
   has_one :giis_loss_ctgry, foreign_key: :loss_cat_cd, primary_key: :loss_cat_cd
   has_one :giis_clm_stat, foreign_key: :clm_stat_cd, primary_key: :clm_stat_cd
 
@@ -55,18 +56,18 @@ class GiclClaim < ApplicationRecord
   end
 
   def calendar_dates(loss_date, date_reported)
-    (date_reported.to_date - loss_date.to_date + 1).to_i
+    (date_reported.to_date - loss_date.to_date).to_i
   end
 
-  def business_days_between(loss_date, date_reported)
-    business_days = 0
-    date = date_reported
-    while date > loss_date
-     business_days = business_days + 1 unless date.saturday? or date.sunday?
-     date = date - 1.day
-    end
-    business_days
-  end
+  # def business_days_between(loss_date, date_reported)
+  #   business_days = 0
+  #   date = date_reported
+  #   while date > loss_date
+  #    business_days = business_days + 1 unless date.saturday? or date.sunday?
+  #    date = date - 1.day
+  #   end
+  #   business_days
+  # end
 
   def loss_category
     GiisLossCtgry.where(line_cd: self.line_cd, loss_cat_cd: self.loss_cat_cd).collect(&:description).first

@@ -11,7 +11,7 @@ class ClaimsController < ApplicationController
   end
 
   def index2
-    @all_claims = GiclClaim.all.order(loss_date: :asc).limit(5000)
+    @all_claims = GiclClaim.all.order(loss_date: :asc).limit(1000)
     @claims_by_year = @all_claims.group_by { |c| c.loss_date.beginning_of_year }
 
     render "index2"
@@ -19,6 +19,7 @@ class ClaimsController < ApplicationController
 
   def show
     @claim = GiclClaim.find(params[:id])
+    @claims_tat = ClaimsTat.find_by(genweb_claim_id: params[:id])
   end
 
 end

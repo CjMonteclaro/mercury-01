@@ -1,0 +1,63 @@
+business_time:
+  beginning_of_workday: 8:00 am
+  end_of_workday: 6:00 pm
+  holidays:
+    - Jan 1st, 2016
+    - Jan 2nd, 2016
+    - Feb 8th, 2016
+    - Feb 25th, 2016
+    - Mar 24th, 2016
+    - Mar 25th, 2016
+    - Mar 26th, 2016
+    - Apr 9th, 2016
+    - May 1st, 2016
+    - Jun 12th, 2016
+    - Jul 6th, 2016
+    - Aug 21st, 2016
+    - Aug 29th, 2016
+    - Sep 12th, 2016
+    - Oct 31st, 2016
+    - Nov 1st, 2016
+    - Nov 30th, 2016
+    - Dec 24th, 2016
+    - Dec 25th, 2016
+    - Dec 30th, 2016
+    - Dec 31st, 2016
+    - Jan 1st, 2017
+    - Jan 2nd, 2017
+    - Feb 25th, 2017
+    - Apr 9th, 2017
+    - Apr 13th, 2017
+    - Apr 14th, 2017
+    - Apr 15th, 2017
+    - Apr 28th, 2017
+    - May 1st, 2017
+    - Jun 12th, 2017
+    - Aug 21st, 2017
+    - Aug 28th, 2017
+    - Oct 31st, 2017
+    - Nov 1st, 2017
+    - Nov 30th, 2017
+    - Dec 25th, 2017
+    - Dec 30th, 2017
+    - Dec 31st, 2017
+    - Jan 1st, 2018
+    - Feb 16th, 2018
+    - Mar 29th, 2018
+    - Mar 30th, 2018
+    - Mar 31st, 2018
+    - Apr 1st, 2018
+    - Apr 9th, 2018
+    - May 1st, 2018
+    - May 14th, 2018
+    - Jun 12th, 2018
+    - Jun 15th, 2018
+    - Jul 2nd, 2018
+    - Aug 21st, 2018
+    - Aug 27th, 2018
+  work_week:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri

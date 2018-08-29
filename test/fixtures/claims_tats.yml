@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  genweb_claim_id: 1
+  completion_of_document: 2018-08-28
+  assigned_to_adjuster: 2018-08-28
+  approved: 2018-08-28
+  loa: 2018-08-28
+  out_from_shop: 2018-08-28
+  received_invoice: 2018-08-28
+  payment_request: 2018-08-28
+  to_audit: 2018-08-28
+  to_treasury: 2018-08-28
+  with_estimate: false
+
+two:
+  genweb_claim_id: 1
+  completion_of_document: 2018-08-28
+  assigned_to_adjuster: 2018-08-28
+  approved: 2018-08-28
+  loa: 2018-08-28
+  out_from_shop: 2018-08-28
+  received_invoice: 2018-08-28
+  payment_request: 2018-08-28
+  to_audit: 2018-08-28
+  to_treasury: 2018-08-28
+  with_estimate: false

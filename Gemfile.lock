@@ -77,7 +77,13 @@ GEM
     bootstrap4-datetime-picker-rails (0.1.8)
       jquery-rails (~> 4.2, >= 4.2.0)
       momentjs-rails (~> 2.10, >= 2.10.5)
+    bootstrap4-kaminari-views (1.0.0)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.3)
+    business_time (0.9.3)
+      activesupport (>= 3.2.0)
+      tzinfo
     byebug (10.0.2)
     capybara (2.18.0)
       addressable
@@ -257,6 +263,8 @@ DEPENDENCIES
   axlsx_rails
   bootstrap (~> 4.1.1)
   bootstrap4-datetime-picker-rails
+  bootstrap4-kaminari-views
+  business_time
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

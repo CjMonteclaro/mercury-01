@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Claims Tats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Genweb claim</th>
+      <th>Completion of document</th>
+      <th>Assigned to adjuster</th>
+      <th>Approved</th>
+      <th>Loa</th>
+      <th>Out from shop</th>
+      <th>Received invoice</th>
+      <th>Payment request</th>
+      <th>To audit</th>
+      <th>To treasury</th>
+      <th>With estimate</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @claims_tats.each do |claims_tat| %>
+      <tr>
+        <td><%= claims_tat.genweb_claim_id %></td>
+        <td><%= claims_tat.completion_of_document %></td>
+        <td><%= claims_tat.assigned_to_adjuster %></td>
+        <td><%= claims_tat.approved %></td>
+        <td><%= claims_tat.loa %></td>
+        <td><%= claims_tat.out_from_shop %></td>
+        <td><%= claims_tat.received_invoice %></td>
+        <td><%= claims_tat.payment_request %></td>
+        <td><%= claims_tat.to_audit %></td>
+        <td><%= claims_tat.to_treasury %></td>
+        <td><%= claims_tat.with_estimate %></td>
+        <td><%= link_to 'Show', claims_tat %></td>
+        <td><%= link_to 'Edit', edit_claims_tat_path(claims_tat) %></td>
+        <td><%= link_to 'Destroy', claims_tat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Claims Tat', new_claims_tat_path %>

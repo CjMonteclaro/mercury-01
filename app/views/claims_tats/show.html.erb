@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Genweb claim:</strong>
+  <%= @claims_tat.genweb_claim_id %>
+</p>
+
+<p>
+  <strong>Completion of document:</strong>
+  <%= @claims_tat.completion_of_document %>
+</p>
+
+<p>
+  <strong>Assigned to adjuster:</strong>
+  <%= @claims_tat.assigned_to_adjuster %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @claims_tat.approved %>
+</p>
+
+<p>
+  <strong>Loa:</strong>
+  <%= @claims_tat.loa %>
+</p>
+
+<p>
+  <strong>Out from shop:</strong>
+  <%= @claims_tat.out_from_shop %>
+</p>
+
+<p>
+  <strong>Received invoice:</strong>
+  <%= @claims_tat.received_invoice %>
+</p>
+
+<p>
+  <strong>Payment request:</strong>
+  <%= @claims_tat.payment_request %>
+</p>
+
+<p>
+  <strong>To audit:</strong>
+  <%= @claims_tat.to_audit %>
+</p>
+
+<p>
+  <strong>To treasury:</strong>
+  <%= @claims_tat.to_treasury %>
+</p>
+
+<p>
+  <strong>With estimate:</strong>
+  <%= @claims_tat.with_estimate %>
+</p>
+
+<%= link_to 'Edit', edit_claims_tat_path(@claims_tat) %> |
+<%= link_to 'Back', claims_tats_path %>

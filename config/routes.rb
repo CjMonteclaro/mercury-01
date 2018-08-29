@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :claims_tats
   get 'claims/index'
   get 'claims/index2'
   get 'claims/show'

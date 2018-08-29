@@ -18,8 +18,8 @@
 //= require_tree.
 
 $(function() {
-    $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' });
-    $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
-    $( "#datepicker3" ).datepicker({ dateFormat: 'yy-mm-dd' });
-    $( "#datepicker4" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#loss_date_from" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#loss_date_to" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#release_date_from" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#release_date_to" ).datepicker({ dateFormat: 'yy-mm-dd' });
 });

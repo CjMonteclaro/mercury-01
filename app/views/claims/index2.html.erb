@@ -1,22 +1,47 @@
+<table class="table">
+  <thead>
+    <%= content_tag :th, 'Loss Year' %>
+    <% (1991..2018).each do |year_paid| %>
+      <%= content_tag :th, year_paid %>
+    <% end %>
+    <%= content_tag :th, 'Total Paid' %>
+  </thead>
 
+  <% @claims_by_year.sort.each do |loss_year, claims| %>
+    <tr>
+      <td>
+        <h2><%= loss_year.strftime('%Y') %></h2>
+      </td>
 
-<% @claims_by_year.sort.each do |year, claims| %>
-  <h2 class="bg-primary"><%= year.strftime('%Y') %></h2>
-  <%= format_currency(claims.map{|c| c.get_loss_payment }.sum) %>
-  <% for claim in claims %>
-    <div class="claim">
-      <strong><%= claim.claim_id %></strong>
-      @ <%= claim.loss_date.to_date.to_s(:long) %>
-      @ <%= format_currency claim.loss_pd_amt %><br>
+      <% (1991..2018).each do |column_year| %>
 
-      <% claim.disbursements.group_by { |d| d.last_update.beginning_of_year }.sort.each do |year2, disbursements| %>
-        <%= content_tag :p, year2.strftime('%Y'), class: 'bg-warning' %>
-        <% disbursements.each do |disbursement| %>
-        Check Date <%= format_date disbursement.check_date %>
-        Check Amt <%= content_tag :strong, format_currency(disbursement.amount)  %><br>
+        <% for claim in claims %>
+          <% claim.disbursements.group_by { |d| d.last_update.beginning_of_year }.sort.each do |year_paid, disbursements| %>
+
+            <% if year_paid == column_year %>
+              <td>
+
+                <% disbursements.each do |disbursement| %>
+                <%= format_date disbursement.check_date %>
+                <%= content_tag :strong, format_currency(disbursement.amount)  %><br>
+                <% end %>
+
+              </td>
+            <% else %>
+              <td>
+              </td>
+            <% end %>
+
+          <% end %>
         <% end %>
+
       <% end %>
 
-    </div>
+      <td class="text-right">
+        <%= format_currency(claims.map{|c| c.get_loss_payment }.sum) %>
+      </td>
+    </tr>
   <% end %>
-<% end %>
+
+
+</table>
