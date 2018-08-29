@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :profiles
+  resources :policies
+  resources :quote_vehicles
+  resources :vehicles
+  resources :models
+  resources :brands
   resources :quotes
   resources :users
   resources :charge_rates

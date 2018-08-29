@@ -1,0 +1,2 @@
+module QuoteVehiclesHelper
+end

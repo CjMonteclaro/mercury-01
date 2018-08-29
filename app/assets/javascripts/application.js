@@ -15,22 +15,69 @@
 //= require cocoon
 //= require_tree .
 
+// document.addEventListener('DOMContentLoaded', function() {
 
-$(function() {
-  $(".select-peril").on("change", function() {
-    var select_val = $(this).val();
-    console.log(select_val); // this just displays the selected value in the browser console (if you have the browser console open)
 
-    if (select_val === '7' || select_val === '8' ) {
-      // if the 'Declined' option is chosen
-      // we remove the 'hidden' class from the textarea
-      $(".premium").removeClass("hidden");
-    } else {
-      // if any other option is chosen
-      // we put back the 'hidden' class to the textarea
-      // also, we update the textarea value to BLANK (this part is optional, it depends if you want to keep the value of the textarea)
-      $(".premium").addClass("hidden");
-      $(".premium").val("");
-    }
-  });
+//   $('#select-peril').on('change',
+//     function(){
+//      if ($('#select-peril').find('option:selected').val() !== [6, 7, 8])
+//       {
+//         $('.not-fixed').show();
+//         $('.fixed').hide();
+//       }
+//      else if ($('#select-peril').find('option:selected').val() !== [1, 2, 3, 4, 5])
+//       {
+//         $('.not-fixed').hide();
+//         $('.fixed').show();
+
+//       }
+//       else
+//       {
+
+//       }
+//   });
+
+
+   // $('#select-peril').on('change',
+   //  function(){
+   //    switch($('#select-peril').find('option:selected').val()) {
+   //    case 1:
+   //      $('.not-fixed').show();
+   //      $('.fixed').hide();
+   //      break;
+   //    case 2:
+   //      $('.not-fixed').show();
+   //      $('.fixed').hide();
+   //      break;
+   //    case 3:
+   //      $('.not-fixed').show();
+   //      $('.fixed').hide();
+   //      break;
+   //    case 4:
+   //      $('.not-fixed').show();
+   //      $('.fixed').hide();
+   //      break;
+   //    case 5:
+   //      $('.not-fixed').show();
+   //      $('.fixed').hide();
+   //      break;
+   //    case 6:
+   //      $('.not-fixed').hide();
+   //      $('.fixed').show();
+   //      break;
+   //    case 7:
+   //      $('.not-fixed').hide();
+   //      $('.fixed').show();
+   //      break;
+   //    case 8:
+   //      $('.not-fixed').hide();
+   //      $('.fixed').show();
+   //      break;
+   //    default:
+   //      $('.fixed').hide();
+
+   //      $('.not-fixed').hide();
+   //    }
+   //  }
+
 });
