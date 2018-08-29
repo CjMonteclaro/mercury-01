@@ -9,6 +9,12 @@
     <div class="col-sm-6">
       <%= f.association :subline, label: 'Vehicle Type', selected: 1 %>
       <%#= f.input :coverage_limit %>
+
+      <%= f.simple_fields_for :quote_vehicles do |builder| %>
+        <%= render 'quote_vehicle_fields.html.erb', f: builder %>
+      <% end %>
+
+
       <%= f.association :charge_rates, as: :check_boxes, label_method: :shortname, checked: [1, 2, 6], wrapper_html: {class: 'col-sm-3'}%>
     </div>
 

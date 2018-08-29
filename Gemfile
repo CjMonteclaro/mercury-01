@@ -63,5 +63,8 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'bootstrap4-datetime-picker-rails'
 gem 'jquery-rails'
 
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+
 gem 'roo'
 gem 'cocoon'

@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822063213) do
+ActiveRecord::Schema.define(version: 20180828093856) do
+
+  create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "charge_type_id"
@@ -38,12 +44,30 @@ ActiveRecord::Schema.define(version: 20180822063213) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "models", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "brand_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "perils", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "line_id"
     t.string "name"
     t.string "shortname"
     t.date "from"
     t.date "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "policies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.integer "quote_id"
+    t.string "online_policy_no"
+    t.string "genweb_policy_no"
+    t.string "genweb_bill_no"
+    t.string "genweb_receipt_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,6 +81,21 @@ ActiveRecord::Schema.define(version: 20180822063213) do
     t.decimal "premium", precision: 6, scale: 2
     t.string "prem_type"
     t.boolean "taxed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.date "birthdate"
+    t.string "address_1"
+    t.string "address_2"
+    t.integer "city_id"
+    t.integer "province_id"
+    t.integer "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -84,10 +123,18 @@ ActiveRecord::Schema.define(version: 20180822063213) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quote_vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "quote_id"
+    t.integer "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "quotes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "subline_id"
     t.integer "peril_id"
     t.integer "premium_id"
+    t.integer "user_id"
     t.decimal "coverage_limit", precision: 12, scale: 2
     t.integer "coverage_duration"
     t.decimal "base_prem", precision: 12, scale: 2
@@ -113,6 +160,18 @@ ActiveRecord::Schema.define(version: 20180822063213) do
     t.string "email"
     t.boolean "email_opt_in"
     t.boolean "enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "year_model"
+    t.integer "brand_id"
+    t.integer "model_id"
+    t.string "mv_file_no"
+    t.string "plate_no"
+    t.string "engine_no"
+    t.string "chassis_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

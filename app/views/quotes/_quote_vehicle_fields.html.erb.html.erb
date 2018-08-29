@@ -1,0 +1,6 @@
+<div class="nested-fields row">
+  <%= f.input :vehicle_id, wrapper_html: { class: 'col-sm-8' } %>
+  <%= f.select :brand, collection: Brand.all.collect(&:name), wrapper_html: { class: 'col-sm-8' }  %>
+  <%= f.select :model, collection: Model.all.collect(&:name), wrapper_html: { class: 'col-sm-8' }  %>
+
+</div>

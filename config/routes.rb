@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :policies
   resources :quote_vehicles
   resources :vehicles
-  resources :models
   resources :brands
   resources :quotes
   resources :users
@@ -16,6 +15,10 @@ Rails.application.routes.draw do
   resources :perils
   resources :sublines
   resources :lines
+
+  resources :models do
+    collection { post :import }
+  end
   resources :premiums do
     collection { post :import }
   end

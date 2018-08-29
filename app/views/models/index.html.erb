@@ -2,7 +2,7 @@
 
 <h1>Models</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Brand</th>
@@ -14,7 +14,7 @@
   <tbody>
     <% @models.each do |model| %>
       <tr>
-        <td><%= model.brand_id %></td>
+        <td><%= model.brand.name %></td>
         <td><%= model.name %></td>
         <td><%= link_to 'Show', model %></td>
         <td><%= link_to 'Edit', edit_model_path(model) %></td>
@@ -27,3 +27,14 @@
 <br>
 
 <%= link_to 'New Model', new_model_path %>
+
+<div class="pb-4">
+  <h2>Import Vehicle</h2>
+  <%= form_tag import_models_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</div>
+
+
+<%= paginate @models, theme: 'twitter-bootstrap-4' %>
