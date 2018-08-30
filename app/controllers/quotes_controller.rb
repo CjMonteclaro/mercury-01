@@ -15,6 +15,8 @@ class QuotesController < ApplicationController
       @quote.quote_perils.build(peril_id: peril)
     end
 
+    @quote.quote_vehicles.build
+
   end
 
   def edit
