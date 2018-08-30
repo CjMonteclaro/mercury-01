@@ -11,8 +11,15 @@ class Quote < ApplicationRecord
 	has_many :quote_charges
 	accepts_nested_attributes_for :quote_charges, allow_destroy: true
 
-
 	has_many :charge_rates, through: :quote_charges
+
+	has_many :quote_vehicles
+	accepts_nested_attributes_for :quote_vehicles, allow_destroy: true
+
+	has_many :vehicles, through: :quote_vehicles
+
+	belongs_to :user
+	belongs_to :policy
 
 	before_save :default_coverage_duration
 

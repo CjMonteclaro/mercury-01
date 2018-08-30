@@ -4,6 +4,7 @@ class CreateQuotes < ActiveRecord::Migration[5.1]
       t.integer :subline_id
       t.integer :peril_id
       t.integer :premium_id
+      t.integer :policy_id
       t.integer :user_id
       t.decimal :coverage_limit, precision: 12, scale: 2
       t.integer :coverage_duration
