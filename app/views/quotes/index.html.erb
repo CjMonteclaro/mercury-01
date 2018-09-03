@@ -26,7 +26,7 @@
         <td>
           <% quote.perils.each do |peril|%>
             <%= content_tag :p, peril.name %>
-          <% end %>  
+          <% end %>
         </td>
         <td><%= quote.premium_id %></td>
         <td><%= quote.coverage_limit %></td>
@@ -44,3 +44,5 @@
 <br>
 
 <%= link_to 'New Quote', new_quote_path, class: 'btn btn-secondary text-white' %>
+
+<%= paginate @quotes, theme: 'twitter-bootstrap-4' %>

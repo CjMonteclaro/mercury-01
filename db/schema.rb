@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180828093856) do
+ActiveRecord::Schema.define(version: 20180903021914) do
 
   create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20180828093856) do
   end
 
   create_table "models", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "brand_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -126,6 +125,10 @@ ActiveRecord::Schema.define(version: 20180828093856) do
   create_table "quote_vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "quote_id"
     t.integer "vehicle_id"
+    t.string "mv_file_no"
+    t.string "plate_no"
+    t.string "engine_no"
+    t.string "chassis_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -169,10 +172,6 @@ ActiveRecord::Schema.define(version: 20180828093856) do
     t.integer "year_model"
     t.integer "brand_id"
     t.integer "model_id"
-    t.string "mv_file_no"
-    t.string "plate_no"
-    t.string "engine_no"
-    t.string "chassis_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

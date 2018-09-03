@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  resources :brands
+  resources :models
   resources :profiles
   resources :policies
   resources :quote_vehicles
-  resources :vehicles
-  resources :brands
   resources :quotes
   resources :users
   resources :charge_rates
@@ -16,12 +16,14 @@ Rails.application.routes.draw do
   resources :sublines
   resources :lines
 
-  resources :models do
+  resources :vehicles do
     collection { post :import }
   end
+
   resources :premiums do
     collection { post :import }
   end
+
   get 'claims/index'
 
   get 'claims/show'

@@ -4,12 +4,17 @@ class VehiclesController < ApplicationController
   # GET /vehicles
   # GET /vehicles.json
   def index
-    @vehicles = Vehicle.all
+    @vehicles = Vehicle.all.page(params[:page])
   end
 
   # GET /vehicles/1
   # GET /vehicles/1.json
   def show
+  end
+
+  def import
+    Vehicle.import(params[:file])
+    redirect_to vehicles_path, notice: 'Vehicles imported.'
   end
 
   # GET /vehicles/new
@@ -69,6 +74,6 @@ class VehiclesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vehicle_params
-      params.require(:vehicle).permit(:year_model, :brand_id, :model_id, :mv_file_no, :plate_no, :engine_no, :chassis_no)
+      params.require(:vehicle).permit(:year_model, :brand_id, :model_id)
     end
 end

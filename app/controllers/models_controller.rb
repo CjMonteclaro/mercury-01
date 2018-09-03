@@ -4,18 +4,12 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @models = Model.all.page(params[:page])
+    @models = Model.all
   end
 
   # GET /models/1
   # GET /models/1.json
   def show
-  end
-
-
-  def import
-    Model.import(params[:file])
-    redirect_to models_path, notice: 'Vehicles imported.'
   end
 
   # GET /models/new
@@ -75,6 +69,6 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:brand_id, :name)
+      params.require(:model).permit(:name)
     end
 end

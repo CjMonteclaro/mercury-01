@@ -4,16 +4,8 @@ one:
   year_model: 1
   brand_id: 1
   model_id: 1
-  mv_file_no: MyString
-  plate_no: MyString
-  engine_no: MyString
-  chassis_no: MyString
 
 two:
   year_model: 1
   brand_id: 1
   model_id: 1
-  mv_file_no: MyString
-  plate_no: MyString
-  engine_no: MyString
-  chassis_no: MyString

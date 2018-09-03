@@ -2,7 +2,7 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
 
   def index
-    @quotes = Quote.all
+    @quotes = Quote.all.page(params[:page])
   end
 
   def show
@@ -67,7 +67,9 @@ class QuotesController < ApplicationController
 
     def quote_params
       params.require(:quote).permit(:subline_id, :peril_id, :premium_id, :coverage_limit, :coverage_duration, :base_prem, :total_charges, :gross_prem,
+        :brand, :model, :plate_no, :mv_file_no, :engine_no, :chassis_no,
         quote_perils_attributes: [:id, :quote_id, :peril_id, :sum_insured, :premium, :_destroy],
+        quote_vehicles_attributes: [:vehicle_id],
         quote_charges: [:id, :quote_id, :charge_rate_id, :charge_type_id, :charge_amount, :_destroy],
         charge_rate_ids: []
         )
