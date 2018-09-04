@@ -1,86 +1,4 @@
-<div class="row form-group">
-  <%= content_tag :div, 'Assured:', class: 'col-md-1' %>
-  <%= content_tag :div, @claim.assured_name, class: 'col-md-6' %>
-  <div class="col-md-2">
-    <%= content_tag :p, 'Claim Number:' %>
-    <%= content_tag :p, 'Policy Number:' %>
-  </div>
-  <div class="col-md-3">
-    <%= content_tag :p, @claim.no %>
-    <%= content_tag :p, @claim.polbasic.no %>
-  </div>
-</div>
-
-<div class="row form-group">
-  <%= content_tag :div, 'Claims Status:', class: 'col-md-2' %>
-  <%= content_tag :div, @claim.giis_clm_stat.description, class: 'col-md-6' %>
-</div>
-
-<div class="row form-group">
-    <%= content_tag :div, 'Loss Category:', class: 'col-md-2' %>
-    <%= content_tag :div, @claim.loss_category, class: 'col-md-6' %>
-</div>
-
-<div class="">
-  <table class="table table-borderless col-md-6 float-left">
-    <thead>
-      <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
-      <%= content_tag :th, 'Payee Class' unless loss_exp.nil? %>
-      <%= content_tag :th, 'Payee Name' %>
-      <%= content_tag :th, 'Net Paid Amount' %>
-    </thead>
-    <tbody>
-      <tr>
-          <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
-            <% payee.giis_payee_classes.each do |payee_class| %>
-              <%= content_tag :td, "#{payee_class.description.titleize}" unless loss_exp.net_amt == 0 %>
-            <% end %>
-            <%= content_tag :td, payee.name  unless loss_exp.net_amt == 0 %>
-            <%= content_tag :td, format_currency(loss_exp.net_amt) unless loss_exp.net_amt == 0 %>
-          <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <table class="table table-borderless col-md-5 float-right">
-    <thead>
-      <% @claim.giac_direct_claim_payts.each do |payment| %>
-      <%= content_tag :th, 'Check No.' unless payment.nil? %>
-      <%= content_tag :th, 'Check Prepared' %>
-      <%= content_tag :th, 'Check Release' %>
-    </thead>
-    <tbody>
-      <tr>
-        <% payment.giac_chk_disbursements.each do |disbursement| %>
-          <%= content_tag :td, disbursement.check_number unless disbursement.nil? %>
-          <%= content_tag :td, format_date(disbursement.check_date) unless disbursement.nil? %>
-        <% end %>
-        <% payment.giac_chk_release_infos.each do |check_info| %>
-          <%= content_tag :td, format_date(check_info.check_release_date) unless check_info.nil? %>
-        <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-
-<table class="table table-bordered">
-  <thead class="text-center">
-    <th colspan="2">Effectivity Date</th>
-    <%= content_tag :th, 'Date of Loss' %>
-    <%= content_tag :th, 'Date Reported' %>
-  </thead>
-  <tbody class="text-center">
-    <tr>
-      <%= content_tag :td, format_date(@claim.effectivity_date) %>
-      <%= content_tag :td, format_date(@claim.expiry_date) %>
-      <%= content_tag :td, format_date(@claim.loss_date) %>
-      <%= content_tag :td, format_date(@claim.date_reported) %>
-    </tr>
-  </tbody>
-</table>
+<%= render 'form_details', claim: @claim %>
 
 <%= simple_form_for(@claims_tat) do |f| %>
   <%= f.error_notification %>
@@ -88,31 +6,42 @@
 
   <div class="form-inputs">
 
-    <%= f.input :genweb_claim_id, as: :hidden, input_html: {value: @claim.claim_id} unless params[:action] == "edit"%>
+    <%= f.input :genweb_claim_id, as: :hidden, input_html: {value: @claim&.claim_id} unless params[:action] == "edit" %>
 
-    <%= f.input :completion_of_document, label: 'Competion of Document' %>
+    <%= f.label 'Completion of Document', class: 'pt-2' %>
+    <%= f.input :completion_of_document, as: :string, label: false ,input_html: {id: 'cod', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :assigned_to_adjuster, label: 'Assined to Adjuster' %>
+    <%= f.label 'Assigned to Adjuster', class: 'pt-2' %>
+    <%= f.input :assigned_to_adjuster, as: :string, label: false, input_html: {id: 'ata', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :approved, label: 'Approved by Claims' %>
+    <%= f.label 'Approved by Claims', class: 'pt-2' %>
+    <%= f.input :approved, as: :string, label: false, input_html: {id: 'apprvd', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :loa, label: 'Date of LOA' %>
+    <%= f.label 'Date of LOA', class: 'pt-2' %>
+    <%= f.input :loa_release, as: :string, label: false, input_html: {id: 'loa', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :out_from_shop, label: 'Out from Shop' %>
+    <%= f.label 'Out from Shop', class: 'pt-2' %>
+    <%= f.input :out_from_shop, as: :string, label: false, input_html: {id: 'ofs', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :received_invoice, label: 'Invoice Received' %>
+    <%= f.label 'Invoice Recieved', class: 'pt-2' %>
+    <%= f.input :invoice_recieved, as: :string, label: false, input_html: {id: 'rec_invoice', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :payment_request, label: 'Request for Payment' %>
+    <%= f.label 'Request for Payment', class: 'pt-2' %>
+    <%= f.input :payment_request, as: :string, label: false, input_html: {id: 'payment_req', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :to_audit, label: 'Audit' %>
+    <%= f.label 'Audit', class: 'pt-2' %>
+    <%= f.input :to_audit, as: :string, label: false, input_html: {id: 'to_audit', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :to_treasury, label: 'Treasury' %>
+    <%= f.label 'Treasury', class: 'pt-2' %>
+    <%= f.input :to_treasury, as: :string, label: false, input_html: {id: 'to_treasury', class: 'col-md-3', placeholder: 'Select Date'} %>
 
-    <%= f.input :with_estimate, label: 'Attached Estimate' %>
+    <%= f.label 'Attached Estimate', class: 'pt-2' %>
+    <%= f.input :with_estimate, label: false %>
 
   </div>
 
-  <div class="form-actions">
+  <div class="form-actions py-3">
     <%= f.submit "Add", class: 'btn btn-primary' %>
+    <%= link_to 'Back', claims_tats_path, class: 'btn btn-primary' %>
   </div>
 <% end %>

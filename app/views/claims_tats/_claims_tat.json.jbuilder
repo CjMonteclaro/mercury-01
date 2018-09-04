@@ -1,2 +1,2 @@
-json.extract! claims_tat, :id, :genweb_claim_id, :completion_of_document, :assigned_to_adjuster, :approved, :loa, :out_from_shop, :received_invoice, :payment_request, :to_audit, :to_treasury, :with_estimate, :created_at, :updated_at
+json.extract! claims_tat, :id, :genweb_claim_id, :completion_of_document, :cod_to_adjuster_tat, :assigned_to_adjuster, :adjuster_approval_tat, :approved, :approval_to_loa, :loa_release, :loa_release_to_out_from_shop_tat, :out_from_shop, :shop_to_invoice_recieved_tat, :invoice_recieved, :recieved_invoice_to_payment_request_tat, :payment_request, :pr_to_audit_tat, :to_audit, :audit_to_treasury_tat, :to_treasury, :with_estimate, :created_at, :updated_at
 json.url claims_tat_url(claims_tat, format: :json)

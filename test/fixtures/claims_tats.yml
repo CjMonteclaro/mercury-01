@@ -2,26 +2,42 @@
 
 one:
   genweb_claim_id: 1
-  completion_of_document: 2018-08-28
-  assigned_to_adjuster: 2018-08-28
-  approved: 2018-08-28
-  loa: 2018-08-28
-  out_from_shop: 2018-08-28
-  received_invoice: 2018-08-28
-  payment_request: 2018-08-28
-  to_audit: 2018-08-28
-  to_treasury: 2018-08-28
+  completion_of_document: 2018-09-03
+  cod_to_adjuster_tat: 1
+  assigned_to_adjuster: 2018-09-03
+  adjuster_approval_tat: 1
+  approved: 2018-09-03
+  approval_to_loa: 1
+  loa_release: 2018-09-03
+  loa_release_to_out_from_shop_tat: 1
+  out_from_shop: 2018-09-03
+  shop_to_invoice_recieved_tat: 1
+  invoice_recieved: 2018-09-03
+  recieved_invoice_to_payment_request_tat: 1
+  payment_request: 2018-09-03
+  pr_to_audit_tat: 1
+  to_audit: 2018-09-03
+  audit_to_treasury_tat: 1
+  to_treasury: 2018-09-03
   with_estimate: false
 
 two:
   genweb_claim_id: 1
-  completion_of_document: 2018-08-28
-  assigned_to_adjuster: 2018-08-28
-  approved: 2018-08-28
-  loa: 2018-08-28
-  out_from_shop: 2018-08-28
-  received_invoice: 2018-08-28
-  payment_request: 2018-08-28
-  to_audit: 2018-08-28
-  to_treasury: 2018-08-28
+  completion_of_document: 2018-09-03
+  cod_to_adjuster_tat: 1
+  assigned_to_adjuster: 2018-09-03
+  adjuster_approval_tat: 1
+  approved: 2018-09-03
+  approval_to_loa: 1
+  loa_release: 2018-09-03
+  loa_release_to_out_from_shop_tat: 1
+  out_from_shop: 2018-09-03
+  shop_to_invoice_recieved_tat: 1
+  invoice_recieved: 2018-09-03
+  recieved_invoice_to_payment_request_tat: 1
+  payment_request: 2018-09-03
+  pr_to_audit_tat: 1
+  to_audit: 2018-09-03
+  audit_to_treasury_tat: 1
+  to_treasury: 2018-09-03
   with_estimate: false

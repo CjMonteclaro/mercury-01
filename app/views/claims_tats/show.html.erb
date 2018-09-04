@@ -11,8 +11,18 @@
 </p>
 
 <p>
+  <strong>Cod to adjuster tat:</strong>
+  <%= pluralize(@claims_tat.cod_to_adjuster_tat, 'Day') %>
+</p>
+
+<p>
   <strong>Assigned to adjuster:</strong>
   <%= @claims_tat.assigned_to_adjuster %>
+</p>
+
+<p>
+  <strong>Adjuster approval tat:</strong>
+  <%= pluralize(@claims_tat.adjuster_approval_tat, 'Day') %>
 </p>
 
 <p>
@@ -21,8 +31,18 @@
 </p>
 
 <p>
-  <strong>Loa:</strong>
-  <%= @claims_tat.loa %>
+  <strong>Approval to loa:</strong>
+  <%= pluralize(@claims_tat.approval_to_loa, 'Day') %>
+</p>
+
+<p>
+  <strong>Loa release:</strong>
+  <%= @claims_tat.loa_release %>
+</p>
+
+<p>
+  <strong>Loa release to out from shop tat:</strong>
+  <%= pluralize(@claims_tat.loa_release_to_out_from_shop_tat, 'Day') %>
 </p>
 
 <p>
@@ -31,8 +51,18 @@
 </p>
 
 <p>
-  <strong>Received invoice:</strong>
-  <%= @claims_tat.received_invoice %>
+  <strong>Shop to invoice recieved tat:</strong>
+  <%= pluralize(@claims_tat.shop_to_invoice_recieved_tat, 'Day') %>
+</p>
+
+<p>
+  <strong>Invoice recieved:</strong>
+  <%= @claims_tat.invoice_recieved %>
+</p>
+
+<p>
+  <strong>Recieved invoice to payment request tat:</strong>
+  <%= pluralize(@claims_tat.recieved_invoice_to_payment_request_tat, 'Day') %>
 </p>
 
 <p>
@@ -41,8 +71,18 @@
 </p>
 
 <p>
+  <strong>Payment request to audit tat:</strong>
+  <%= pluralize(@claims_tat.pr_to_audit_tat, 'Day') %>
+</p>
+
+<p>
   <strong>To audit:</strong>
   <%= @claims_tat.to_audit %>
+</p>
+
+<p>
+  <strong>Audit to treasury tat:</strong>
+  <%= pluralize(@claims_tat.audit_to_treasury_tat, 'Day') %>
 </p>
 
 <p>
@@ -56,4 +96,5 @@
 </p>
 
 <%= link_to 'Edit', edit_claims_tat_path(@claims_tat) %> |
-<%= link_to 'Back', claims_tats_path %>
+<%= link_to 'Back', claims_tats_path %> |
+<%= link_to 'Back to Claims', claims_index_path %>

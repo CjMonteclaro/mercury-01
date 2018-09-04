@@ -2,18 +2,26 @@
 
 <h1>Claims Tats</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Genweb claim</th>
       <th>Completion of document</th>
+      <th>Cod to adjuster tat</th>
       <th>Assigned to adjuster</th>
+      <th>Adjuster approval tat</th>
       <th>Approved</th>
-      <th>Loa</th>
+      <th>Approval to loa</th>
+      <th>Loa release</th>
+      <th>Loa release to out from shop tat</th>
       <th>Out from shop</th>
-      <th>Received invoice</th>
+      <th>Shop to invoice recieved tat</th>
+      <th>Invoice recieved</th>
+      <th>Recieved invoice to payment request tat</th>
       <th>Payment request</th>
+      <th>Payment request to audit tat</th>
       <th>To audit</th>
+      <th>Audit to treasury tat</th>
       <th>To treasury</th>
       <th>With estimate</th>
       <th colspan="3"></th>
@@ -25,13 +33,21 @@
       <tr>
         <td><%= claims_tat.genweb_claim_id %></td>
         <td><%= claims_tat.completion_of_document %></td>
+        <td><%= claims_tat.cod_to_adjuster_tat %></td>
         <td><%= claims_tat.assigned_to_adjuster %></td>
+        <td><%= claims_tat.adjuster_approval_tat %></td>
         <td><%= claims_tat.approved %></td>
-        <td><%= claims_tat.loa %></td>
+        <td><%= claims_tat.approval_to_loa %></td>
+        <td><%= claims_tat.loa_release %></td>
+        <td><%= claims_tat.loa_release_to_out_from_shop_tat %></td>
         <td><%= claims_tat.out_from_shop %></td>
-        <td><%= claims_tat.received_invoice %></td>
+        <td><%= claims_tat.shop_to_invoice_recieved_tat %></td>
+        <td><%= claims_tat.invoice_recieved %></td>
+        <td><%= claims_tat.recieved_invoice_to_payment_request_tat %></td>
         <td><%= claims_tat.payment_request %></td>
+        <td><%= claims_tat.pr_to_audit_tat %></td>
         <td><%= claims_tat.to_audit %></td>
+        <td><%= claims_tat.audit_to_treasury_tat %></td>
         <td><%= claims_tat.to_treasury %></td>
         <td><%= claims_tat.with_estimate %></td>
         <td><%= link_to 'Show', claims_tat %></td>
@@ -44,4 +60,5 @@
 
 <br>
 
-<%= link_to 'New Claims Tat', new_claims_tat_path %>
+<%= link_to 'New Claims Tat', new_claims_tat_path %> |
+<%= link_to 'Back to Claims', claims_index_path %>
