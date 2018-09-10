@@ -5,7 +5,7 @@ xlsx_package = Axlsx::Package.new
 wb = xlsx_package.workbook
 wb.styles do |style|
   number_format = style.add_style(num_fmt: 4)
-  date_format = style.add_style(num_fmt: 14)
+  date_format = style.add_style(num_fmt: 15, alignment: { horizontal: :center })
   center = style.add_style(alignment: { horizontal: :center })
   right = style.add_style(alignment: { horizontal: :right })
   wb.add_worksheet(name: "PAYEE") do |sheet|
@@ -23,36 +23,90 @@ wb.styles do |style|
                   "DATE OF LOSS",
                   "INTERVAL PERIOD IN MONTHS (Policy Effectivity to Date of Loss)",
                   "DATE REPORTED",
-                  "TAT (Working Days)",
-                  "TAT (Calendar Days)",
+                  "TAT",
+                  "RECEIPT OF COMPLETE DOCUMENTS",
+                  "TAT",
+                  "WITH ATTACHED",
+                  "ASSINED TO ADJUSTER",
+                  "TAT",
                   "NAME OF ADJUSTER",
+                  "FINAL ADJUSTER REPORT",
+                  "TAT",
+                  "DATE APPROVED",
+                  "TAT",
+                  "DATE OF LOA",
+                  "TAT",
+                  "OUT FROM SHOP",
+                  "TAT",
+                  "INVOICE RECEIVED",
+                  "TAT",
                   "COST",
-                  "DATE CHECK PREPARED",
+                  "RESQUEST FOR PAYMENT",
+                  "TAT",
+                  "CHECK DATE",
+                  "TAT",
+                  "TO AUDIT",
+                  "TAT",
                   "CHECK NUMBER",
+                  "TO TREASURY",
+                  "TAT",
                   "CHECK RELEASE",
-                  "TAT (Loss Date to Check Release)"
+                  "TAT"
                   ],
-    style: [center,center,center,center,center,center,center,nil,center,center,center,center,center,center,center,center,center,center,center,center]
+    style: [center, center, center, center,
+            center, center, center, nil,
+            center, center, center, center,
+            center, center, center, center,
+            center, center, center, center,
+            center, center, center, center,
+            center, center, center, center,
+            center, center, center, center,
+            center, center, center, center,
+            center, center, center, center,
+            center, center
+            ]
 
     sheet.merge_cells("I1:J1")
 
     @claims.distinct.each do |claim|
-      @assured_name     = claim.assured_name
-      @claim_number     = claim.no
-      @policy           = claim.polbasic&.no
-      @status           = claim.giis_clm_stat.description
-      @intermediary_name = claim.polbasic&.giis_intermediary&.name
-      @loss_category    = claim.loss_category
-      @loss_details     = claim.loss_dtls
-      @effectivity_date = claim.effectivity_date
-      @expiry_date      = claim.expiry_date
-      @loss_date        = claim.loss_date
-      @months_between   = claim.months_between(claim.effectivity_date, claim.loss_date)
-      @date_reported    = claim.date_reported
-      @business_days    = claim.loss_date.business_days_until(claim.date_reported)
-      @calendar_dates   = claim.calendar_dates(claim.loss_date, claim.date_reported)
-      @adjuster         = claim.adjuster
-      @cost             = claim.cost
+      @assured_name             = claim.assured_name
+      @claim_number             = claim.no
+      @policy                   = claim.polbasic&.no
+      @status                   = claim.giis_clm_stat.description
+      @intermediary_name        = claim.polbasic&.giis_intermediary&.name
+      @loss_category            = claim.loss_category
+      @loss_details             = claim.loss_dtls
+      @effectivity_date         = claim.effectivity_date
+      @expiry_date              = claim.expiry_date
+      @loss_date                = claim.loss_date
+      @months_between           = claim.months_between(claim.effectivity_date, claim.loss_date)
+      @date_reported            = claim.date_reported
+      @loss_to_reported_tat     = claim.loss_to_reported_tat
+      @complete_doc             = claim.claims_tat.complete_doc unless claim.claims_tat.nil?
+      @reported_to_completed_tat = claim.reported_to_completed_tat unless claim.claims_tat.nil?
+      @with_estimate            = claim.claims_tat.with_estimate unless claim.claims_tat.nil?
+      @assigned_to_adjuster     = claim.claims_tat.assigned_to_adjuster unless claim.claims_tat.nil?
+      @completed_to_assignment_tat = claim.completed_to_assignment_tat unless claim.claims_tat.nil?
+      @adjuster                 = claim.adjuster
+      @final_report             = claim.claims_tat.final_report unless claim.claims_tat.nil?
+      @assignment_to_report_tat = claim.assignment_to_report_tat unless claim.claims_tat.nil?
+      @approved                 = claim.claims_tat.approved unless claim.claims_tat.nil?
+      @report_to_approved_tat   = claim.report_to_approved_tat unless claim.claims_tat.nil?
+      @loa_release              = claim.claims_tat.loa_release unless claim.claims_tat.nil?
+      @approved_to_loa_tat      = claim.approved_to_loa_tat unless claim.claims_tat.nil?
+      @shop_out                 = claim.claims_tat.shop_out unless claim.claims_tat.nil?
+      @loa_to_shop_out_tat      = claim.loa_to_shop_out_tat unless claim.claims_tat.nil?
+      @invoice_received         = claim.claims_tat.invoice_received unless claim.claims_tat.nil?
+      @shop_out_to_inv_rcv_tat  = claim.shop_out_to_inv_rcv_tat unless claim.claims_tat.nil?
+      @cost                     = claim.cost
+      @payment_request          = claim.claims_tat.payment_request unless claim.claims_tat.nil?
+      @inv_rcv_to_pymt_req_tat  = claim.inv_rcv_to_pymt_req_tat unless claim.claims_tat.nil?
+      @pymt_req_to_chk_prep_tat = claim.pymt_req_to_chk_prep_tat unless claim.claims_tat.nil?
+      @to_audit                 = claim.claims_tat.to_audit unless claim.claims_tat.nil?
+      @chk_prep_to_audit_tat    = claim.chk_prep_to_audit_tat unless claim.claims_tat.nil?
+      @to_treasury              = claim.claims_tat.to_treasury unless claim.claims_tat.nil?
+      @audit_to_treasury_tat    = claim.audit_to_treasury_tat unless claim.claims_tat.nil?
+      @treasury_to_chk_rls_tat  = claim.treasury_to_chk_rls_tat unless claim.claims_tat.nil?
 
       claim.gicl_clm_loss_exps.each do |loss_exp|
         loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee|
@@ -83,21 +137,109 @@ wb.styles do |style|
                         @loss_date,
                         @months_between,
                         @date_reported,
-                        @business_days,
-                        @calendar_dates,
+                        @loss_to_reported_tat,
+                        @complete_doc,
+                        @reported_to_completed_tat,
+                        @with_estimate,
+                        @assigned_to_adjuster,
+                        @completed_to_assignment_tat,
                         @adjuster,
+                        @final_report,
+                        @assignment_to_report_tat,
+                        @approved,
+                        @report_to_approved_tat,
+                        @loa_release,
+                        @approved_to_loa_tat,
+                        @shop_out,
+                        @loa_to_shop_out_tat,
+                        @invoice_received,
+                        @shop_out_to_inv_rcv_tat,
                         @cost,
+                        @payment_request,
+                        @inv_rcv_to_pymt_req_tat,
                         @check_date,
+                        @pymt_req_to_chk_prep_tat,
+                        @to_audit,
+                        @chk_prep_to_audit_tat,
                         @check_number,
+                        @to_treasury,
+                        @audit_to_treasury_tat,
                         @check_release_date,
-                        (@loss_date.business_days_until(@check_release_date) unless @check_release_date.nil?)
+                        @treasury_to_chk_rls_tat
                         ],
-            style: [nil,nil,nil,nil,center,nil,center,nil,nil,nil,nil,center,nil,center,center,center,number_format,nil,right,nil,center]
+            style: [nil,
+                    nil,
+                    nil,
+                    nil,
+                    center,
+                    nil,
+                    center,
+                    nil,
+                    date_format,
+                    date_format,
+                    date_format,
+                    center,
+                    nil,
+                    center,
+                    date_format,
+                    center,
+                    center,
+                    date_format,
+                    center,
+                    center,
+                    date_format,
+                    center,
+                    date_format,
+                    center,
+                    date_format,
+                    center,
+                    date_format,
+                    center,
+                    date_format,
+                    center,
+                    number_format,
+                    date_format,
+                    center,
+                    date_format,
+                    center,
+                    date_format,
+                    center,
+                    nil,
+                    date_format,
+                    center,
+                    date_format,
+                    center]
 
-        @payee          = nil
-        @check_date     = nil
-        @check_number   = nil
-        @check_release_date  =  nil
+        @payee                      = nil
+        @complete_doc               = nil
+        @check_date                 = nil
+        @check_number               = nil
+        @check_release_date         = nil
+        @reported_to_completed_tat  = nil
+        @with_estimate              = nil
+        @completed_to_assignment_tat= nil
+        @assigned_to_adjuster       = nil
+        @final_report               = nil
+        @assignment_to_report_tat   = nil
+        @approved                   = nil
+        @report_to_approved_tat     = nil
+        @loa_release                = nil
+        @approved_to_loa_tat        = nil
+        @shop_out                   = nil
+        @loa_to_shop_out_tat        = nil
+        @invoice_received           = nil
+        @shop_out_to_inv_rcv_tat    = nil
+        @payment_request            = nil
+        @inv_rcv_to_pymt_req_tat    = nil
+        @check_date                 = nil
+        @pymt_req_to_chk_prep_tat   = nil
+        @to_audit                   = nil
+        @chk_prep_to_audit_tat      = nil
+        @check_number               = nil
+        @to_treasury                = nil
+        @audit_to_treasury_tat      = nil
+        @check_release_date         = nil
+        @treasury_to_chk_rls_tat    = nil
     end
   end
 end

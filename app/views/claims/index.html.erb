@@ -38,7 +38,7 @@
         <%# end %>
       </td> -->
       <td><%= link_to 'Show Details', claims_show_path(id: claim.claim_id), class: 'btn btn-info' %></td>
-      <td><%= link_to 'Input Dates', new_claims_tat_path(id: claim.claim_id), class: 'btn btn-success' %></td>
+      <td><%= link_to 'Input Details', if claim.claims_tat.nil? then new_claims_tat_path(id: claim.claim_id) else edit_claims_tat_path(id: claim.claims_tat.id) end, class: 'btn btn-success' %></td>
     </tr>
     <% end %>
   </tbody>

@@ -59,11 +59,11 @@
   <div class="">
     <table class="table table-borderless col-md-6 float-left">
       <thead>
-        <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
-        <%= content_tag :th, 'Payee Class' unless loss_exp.nil? %>
-        <%= content_tag :th, 'Payee Name' %>
-        <%= content_tag :th, 'Net Paid Amount' %>
+        <%= content_tag :th, 'Payee Class' unless @claim.gicl_clm_loss_exps.nil? %>
+        <%= content_tag :th, 'Payee Name' unless @claim.gicl_clm_loss_exps.nil? %>
+        <%= content_tag :th, 'Net Paid Amount' unless @claim.gicl_clm_loss_exps.nil? %>
       </thead>
+      <% @claim.gicl_clm_loss_exps.each do |loss_exp| %>
       <tbody>
         <tr>
             <% loss_exp.giis_payees.where(no: loss_exp.payee_no).each do |payee| %>
@@ -80,16 +80,16 @@
 
     <table class="table table-borderless col-md-5 float-right">
       <thead>
-        <% @claim.giac_direct_claim_payts.each do |payment| %>
-        <%= content_tag :th, 'Check No.' unless payment.nil? %>
-        <%= content_tag :th, 'Check Prepared' %>
-        <%= content_tag :th, 'Check Release' %>
+        <%= content_tag :th, 'Check No.' unless @claim.giac_direct_claim_payts.nil? %>
+        <%= content_tag :th, 'Check Prepared' unless @claim.giac_direct_claim_payts.nil? %>
+        <%= content_tag :th, 'Check Release' unless @claim.giac_direct_claim_payts.nil? %>
       </thead>
+      <% @claim.giac_direct_claim_payts.each do |payment| %>
       <tbody>
         <tr>
           <% payment.giac_chk_disbursements.each do |disbursement| %>
             <%= content_tag :td, disbursement.check_number unless disbursement.nil? %>
-            <%= content_tag :td, format_date(disbursement.check_date) unless disbursement.nil? %>
+            <%= content_tag :td, format_date(disbursement.check_date) unless disbursement.nil?  %>
           <% end %>
           <% payment.giac_chk_release_infos.each do |check_info| %>
             <%= content_tag :td, format_date(check_info.check_release_date) unless check_info.nil? %>
@@ -100,37 +100,71 @@
     </table>
   </div>
 
-
+<div class="dates">
   <table class="table table-bordered">
     <thead class="text-center">
       <th colspan="2">Effectivity Date</th>
       <%= content_tag :th, 'Date of Loss' %>
+      <%= content_tag :th, 'Interval Period' %>
       <%= content_tag :th, 'Date Reported' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Completed Documents' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Assigned to Adjuster' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Final Adjuster Report' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Approved by Claims' %>
+      <%= content_tag :th, 'TAT' %>
       <%= content_tag :th, 'Date of LOA' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Out from Shop' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Invoice Received' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'Request for Payment' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'TAT (To Check Date)' %>
+      <%= content_tag :th, 'To Audit' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'To Treasury' %>
+      <%= content_tag :th, 'TAT' %>
+      <%= content_tag :th, 'TAT (To Check Release)'%>
     </thead>
     <tbody class="text-center">
       <tr>
         <%= content_tag :td, format_date(@claim.effectivity_date) %>
         <%= content_tag :td, format_date(@claim.expiry_date) %>
         <%= content_tag :td, format_date(@claim.loss_date) %>
+        <%= content_tag :td, pluralize(@claim.months_between(@claim.effectivity_date, @claim.loss_date), 'Month') %>
         <%= content_tag :td, format_date(@claim.date_reported) %>
-        <%= content_tag :td, format_date(@claims_tat.loa) unless @claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.loss_to_reported_tat, 'Day') %>
+        <%= content_tag :td, format_date(@claim.claims_tat.complete_doc) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.reported_to_completed_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.assigned_to_adjuster) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.completed_to_assignment_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.final_report) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.completed_to_assignment_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.approved) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.report_to_approved_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.loa_release) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.approved_to_loa_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.shop_out) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.loa_to_shop_out_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.invoice_received) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.shop_out_to_inv_rcv_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.payment_request) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.inv_rcv_to_pymt_req_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.pymt_req_to_chk_prep_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.to_audit) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.chk_prep_to_audit_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, format_date(@claim.claims_tat.to_treasury) unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.audit_to_treasury_tat, 'Day') unless @claim.claims_tat.nil? %>
+        <%= content_tag :td, pluralize(@claim.treasury_to_chk_rls_tat, 'Day') unless @claim.claims_tat.nil? %>
       </tr>
     </tbody>
   </table>
+</div>
 
-  <div class="row form-group">
-    <%= content_tag :div, 'Interval Period (Policy Effectivity to Date of Loss):', class: 'col-md-4' %>
-    <%= content_tag :div, "#{@claim.months_between(@claim.effectivity_date, @claim.loss_date)} Month/s" %>
-  </div>
-  <div class="row form-group">
-    <%= content_tag :div, 'Turn Around Time (Date of Loss to Date Reported):', class: 'col-md-4' %>
-    <div>
-      <%= content_tag :p, "#{@claim.calendar_dates(@claim.loss_date, @claim.date_reported)} Calendar Days" %>
-      <%= content_tag :p, "#{@claim.loss_date.business_days_until(@claim.date_reported)} Working Days" %>
-      <%#= content_tag :p, "#{@claim.business_days_between(@claim.loss_date, @claim.date_reported)} Working Days" %>
-    </div>
-  </div>
-
-
+<td><%= link_to 'Input Details', if @claim.claims_tat.nil? then new_claims_tat_path(id: @claim.claim_id) else edit_claims_tat_path(id: @claim.claims_tat.id) end, class: 'btn btn-success' %></td>
 <%= link_to 'Back', url_for(:back), class: 'btn btn-danger float-right' %>

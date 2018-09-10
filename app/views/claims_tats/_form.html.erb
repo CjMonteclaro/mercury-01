@@ -5,43 +5,56 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-
     <%= f.input :genweb_claim_id, as: :hidden, input_html: {value: @claim&.claim_id} unless params[:action] == "edit" %>
-
-    <%= f.label 'Completion of Document', class: 'pt-2' %>
-    <%= f.input :completion_of_document, as: :string, label: false ,input_html: {id: 'cod', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Assigned to Adjuster', class: 'pt-2' %>
-    <%= f.input :assigned_to_adjuster, as: :string, label: false, input_html: {id: 'ata', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Approved by Claims', class: 'pt-2' %>
-    <%= f.input :approved, as: :string, label: false, input_html: {id: 'apprvd', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Date of LOA', class: 'pt-2' %>
-    <%= f.input :loa_release, as: :string, label: false, input_html: {id: 'loa', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Out from Shop', class: 'pt-2' %>
-    <%= f.input :out_from_shop, as: :string, label: false, input_html: {id: 'ofs', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Invoice Recieved', class: 'pt-2' %>
-    <%= f.input :invoice_recieved, as: :string, label: false, input_html: {id: 'rec_invoice', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Request for Payment', class: 'pt-2' %>
-    <%= f.input :payment_request, as: :string, label: false, input_html: {id: 'payment_req', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Audit', class: 'pt-2' %>
-    <%= f.input :to_audit, as: :string, label: false, input_html: {id: 'to_audit', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Treasury', class: 'pt-2' %>
-    <%= f.input :to_treasury, as: :string, label: false, input_html: {id: 'to_treasury', class: 'col-md-3', placeholder: 'Select Date'} %>
-
-    <%= f.label 'Attached Estimate', class: 'pt-2' %>
-    <%= f.input :with_estimate, label: false %>
-
+    <table class="table table-borderless col-md-6 float-left">
+      <tr>
+        <%= content_tag :td, 'Completed Documents:' %>
+        <td><%= f.input :complete_doc, as: :string, label: false, input_html: {id: 'cod', class: 'form-control', placeholder: 'Select Date'} %></td>
+        <td><%= f.input :with_estimate, label: 'With Estimate' %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Assigned to Adjuster:' %>
+        <td><%= f.input :assigned_to_adjuster, as: :string, label: false, input_html: {id: 'ata', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Final Adjuster Report:' %>
+        <td><%= f.input :final_report, as: :string, label: false, input_html: {id: 'far', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Approved by Claims:' %>
+        <td><%= f.input :approved, as: :string, label: false, input_html: {id: 'apprvd', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Date of LOA:' %>
+        <td><%= f.input :loa_release, as: :string, label: false, input_html: {id: 'loa', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+    </table>
+    <table class="table table-borderless col-md-6 float-right">
+      <tr>
+        <%= content_tag :td, 'Out from Shop:' %>
+        <td><%= f.input :shop_out, as: :string, label: false, input_html: {id: 'ofs', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Invoice Received:' %>
+        <td><%= f.input :invoice_received, as: :string, label: false, input_html: {id: 'rec_invoice', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Request for Payment:' %>
+        <td><%= f.input :payment_request, as: :string, label: false, input_html: {id: 'payment_req', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Sent to Audit:' %>
+        <td><%= f.input :to_audit, as: :string, label: false, input_html: {id: 'to_audit', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+      <tr>
+        <%= content_tag :td, 'Sent to Treasury:' %>
+        <td><%= f.input :to_treasury, as: :string, label: false, input_html: {id: 'to_treasury', class: 'form-control', placeholder: 'Select Date'} %></td>
+      </tr>
+    </table>
   </div>
 
   <div class="form-actions py-3">
-    <%= f.submit "Add", class: 'btn btn-primary' %>
-    <%= link_to 'Back', claims_tats_path, class: 'btn btn-primary' %>
+    <%= link_to 'Back', url_for(:back), class: 'btn btn-danger float-right mx-1' %>
+    <%= f.submit "Submit", class: 'btn btn-primary float-right' %>
   </div>
 <% end %>

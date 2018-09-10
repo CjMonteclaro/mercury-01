@@ -1,29 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Claims Tats</h1>
+<h3 class="text-center">Claims Turn Around Time</h3>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Genweb claim</th>
+      <th>Genweb Claim</th>
       <th>Completion of document</th>
-      <th>Cod to adjuster tat</th>
-      <th>Assigned to adjuster</th>
-      <th>Adjuster approval tat</th>
-      <th>Approved</th>
-      <th>Approval to loa</th>
-      <th>Loa release</th>
-      <th>Loa release to out from shop tat</th>
-      <th>Out from shop</th>
-      <th>Shop to invoice recieved tat</th>
-      <th>Invoice recieved</th>
-      <th>Recieved invoice to payment request tat</th>
-      <th>Payment request</th>
-      <th>Payment request to audit tat</th>
-      <th>To audit</th>
-      <th>Audit to treasury tat</th>
-      <th>To treasury</th>
       <th>With estimate</th>
+      <th>Assigned to adjuster</th>
+      <th>Approved</th>
+      <th>Final Adjuster Report</th>
+      <th>Loa release</th>
+      <th>Out from shop</th>
+      <th>Invoice recieved</th>
+      <th>Payment request</th>
+      <th>To audit</th>
+      <th>To treasury</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,25 +22,18 @@
   <tbody>
     <% @claims_tats.each do |claims_tat| %>
       <tr>
-        <td><%= claims_tat.genweb_claim_id %></td>
-        <td><%= claims_tat.completion_of_document %></td>
-        <td><%= claims_tat.cod_to_adjuster_tat %></td>
+        <td><%= claims_tat.claim_no(claims_tat.genweb_claim_id) %></td>
+        <td><%= claims_tat.complete_doc %></td>
+        <td><%= (claims_tat.with_estimate) %></td>
         <td><%= claims_tat.assigned_to_adjuster %></td>
-        <td><%= claims_tat.adjuster_approval_tat %></td>
         <td><%= claims_tat.approved %></td>
-        <td><%= claims_tat.approval_to_loa %></td>
+        <td><%= claims_tat.final_report %></td>
         <td><%= claims_tat.loa_release %></td>
-        <td><%= claims_tat.loa_release_to_out_from_shop_tat %></td>
-        <td><%= claims_tat.out_from_shop %></td>
-        <td><%= claims_tat.shop_to_invoice_recieved_tat %></td>
-        <td><%= claims_tat.invoice_recieved %></td>
-        <td><%= claims_tat.recieved_invoice_to_payment_request_tat %></td>
+        <td><%= claims_tat.shop_out %></td>
+        <td><%= claims_tat.invoice_received %></td>
         <td><%= claims_tat.payment_request %></td>
-        <td><%= claims_tat.pr_to_audit_tat %></td>
         <td><%= claims_tat.to_audit %></td>
-        <td><%= claims_tat.audit_to_treasury_tat %></td>
         <td><%= claims_tat.to_treasury %></td>
-        <td><%= claims_tat.with_estimate %></td>
         <td><%= link_to 'Show', claims_tat %></td>
         <td><%= link_to 'Edit', edit_claims_tat_path(claims_tat) %></td>
         <td><%= link_to 'Destroy', claims_tat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -60,5 +44,5 @@
 
 <br>
 
-<%= link_to 'New Claims Tat', new_claims_tat_path %> |
-<%= link_to 'Back to Claims', claims_index_path %>
+<%= link_to 'New Claims Information', new_claims_tat_path %> |
+<%= link_to 'Home', claims_index_path %>

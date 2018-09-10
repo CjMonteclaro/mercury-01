@@ -10,192 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180903063531) do
-
-  create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "charge_rates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "charge_type_id"
-    t.string "qualifier"
-    t.decimal "rate", precision: 6, scale: 2
-    t.string "rate_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "charge_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.string "shortname"
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20180906024819) do
 
   create_table "claims_tats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "genweb_claim_id"
-    t.date "completion_of_document"
-    t.integer "cod_to_adjuster_tat"
-    t.date "assigned_to_adjuster"
-    t.integer "adjuster_approval_tat"
-    t.date "approved"
-    t.integer "approval_to_loa"
-    t.date "loa_release"
-    t.integer "loa_release_to_out_from_shop_tat"
-    t.date "out_from_shop"
-    t.integer "shop_to_invoice_recieved_tat"
-    t.date "invoice_recieved"
-    t.integer "recieved_invoice_to_payment_request_tat"
-    t.date "payment_request"
-    t.integer "pr_to_audit_tat"
+    t.boolean "attached_estimate"
+    t.date "complete_doc"
+    t.date "to_adjuster"
+    t.date "final_report"
+    t.date "approved_claims"
+    t.date "loa"
+    t.date "shop_out"
+    t.date "invoice_received"
+    t.date "request_payment"
     t.date "to_audit"
-    t.integer "audit_to_treasury_tat"
     t.date "to_treasury"
-    t.boolean "with_estimate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.string "shortname"
-    t.date "from"
-    t.date "to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "models", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "perils", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "line_id"
-    t.string "name"
-    t.string "shortname"
-    t.date "from"
-    t.date "to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "policies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
-    t.integer "quote_id"
-    t.string "online_policy_no"
-    t.string "genweb_policy_no"
-    t.string "genweb_bill_no"
-    t.string "genweb_receipt_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "premiums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "subline_id"
-    t.integer "peril_id"
-    t.string "subline_factor"
-    t.decimal "coverage_limit", precision: 10
-    t.integer "coverage_duration"
-    t.decimal "premium", precision: 6, scale: 2
-    t.string "prem_type"
-    t.boolean "taxed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
-    t.string "first_name"
-    t.string "middle_name"
-    t.string "last_name"
-    t.date "birthdate"
-    t.string "address_1"
-    t.string "address_2"
-    t.integer "city_id"
-    t.integer "province_id"
-    t.integer "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quote_charges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "quote_id"
-    t.integer "charge_rate_id"
-    t.integer "charge_type_id"
-    t.decimal "charge_amount", precision: 12, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quote_perils", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "quote_id"
-    t.integer "subline_id"
-    t.integer "peril_id"
-    t.integer "premium_id"
-    t.decimal "sum_insured", precision: 12, scale: 2
-    t.decimal "base_prem", precision: 12, scale: 2
-    t.decimal "total_charges", precision: 12, scale: 2
-    t.decimal "gross_prem", precision: 12, scale: 2
-    t.integer "policy_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quote_vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "quote_id"
-    t.integer "vehicle_id"
-    t.string "mv_file_no"
-    t.string "plate_no"
-    t.string "engine_no"
-    t.string "chassis_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quotes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "subline_id"
-    t.integer "peril_id"
-    t.integer "premium_id"
-    t.integer "policy_id"
-    t.integer "user_id"
-    t.decimal "coverage_limit", precision: 12, scale: 2
-    t.integer "coverage_duration"
-    t.decimal "base_prem", precision: 12, scale: 2
-    t.decimal "total_charges", precision: 12, scale: 2
-    t.decimal "gross_prem", precision: 12, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sublines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "line_id"
-    t.string "name"
-    t.string "policy_type"
-    t.integer "creator_id"
-    t.date "from"
-    t.date "to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "username"
-    t.string "email"
-    t.boolean "email_opt_in"
-    t.boolean "enabled"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "year_model"
-    t.integer "brand_id"
-    t.integer "model_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

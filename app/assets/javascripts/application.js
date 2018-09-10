@@ -25,6 +25,7 @@ $(function() {
     $( "#release_date_to" ).datepicker({ dateFormat: 'yy-mm-dd' });
     $( "#cod" ).datepicker({ dateFormat: 'yy-mm-dd' });
     $( "#ata" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#far" ).datepicker({ dateFormat: 'yy-mm-dd' });
     $( "#apprvd" ).datepicker({ dateFormat: 'yy-mm-dd' });
     $( "#loa" ).datepicker({ dateFormat: 'yy-mm-dd' });
     $( "#ofs" ).datepicker({ dateFormat: 'yy-mm-dd' });

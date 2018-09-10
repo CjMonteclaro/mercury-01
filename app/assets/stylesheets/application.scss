@@ -17,3 +17,8 @@
  .table-borderless > thead > tr > th {
      border: none;
  }
+
+ div.dates {
+     width: 100%;
+     overflow-x: auto;
+ }
