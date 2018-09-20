@@ -1,46 +1,48 @@
 <h3 class="text-center">Claims Turn Around Time</h3>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Genweb Claim</th>
-      <th>Completion of document</th>
-      <th>With estimate</th>
-      <th>Assigned to adjuster</th>
-      <th>Approved</th>
-      <th>Final Adjuster Report</th>
-      <th>Loa release</th>
-      <th>Out from shop</th>
-      <th>Invoice recieved</th>
-      <th>Payment request</th>
-      <th>To audit</th>
-      <th>To treasury</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @claims_tats.each do |claims_tat| %>
+<div class="dates">
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= claims_tat.claim_no(claims_tat.genweb_claim_id) %></td>
-        <td><%= claims_tat.complete_doc %></td>
-        <td><%= (claims_tat.with_estimate) %></td>
-        <td><%= claims_tat.assigned_to_adjuster %></td>
-        <td><%= claims_tat.approved %></td>
-        <td><%= claims_tat.final_report %></td>
-        <td><%= claims_tat.loa_release %></td>
-        <td><%= claims_tat.shop_out %></td>
-        <td><%= claims_tat.invoice_received %></td>
-        <td><%= claims_tat.payment_request %></td>
-        <td><%= claims_tat.to_audit %></td>
-        <td><%= claims_tat.to_treasury %></td>
-        <td><%= link_to 'Show', claims_tat %></td>
-        <td><%= link_to 'Edit', edit_claims_tat_path(claims_tat) %></td>
-        <td><%= link_to 'Destroy', claims_tat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Genweb Claim No</th>
+        <th>Completion of Document</th>
+        <th>With Estimate</th>
+        <th>Assigned to adjuster</th>
+        <th>Date Approved by Claims</th>
+        <th>Final Adjuster Report</th>
+        <th>Date of LOA</th>
+        <th>Out from Shop</th>
+        <th>Invoice Recieved</th>
+        <th>Request for Payment</th>
+        <th>To Audit</th>
+        <th>To Treasury</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @claims_tats.each do |claims_tat| %>
+        <tr>
+          <td><%= claims_tat.claim_no(claims_tat.genweb_claim_id) %></td>
+          <td><%= format_date(claims_tat.complete_doc) %></td>
+          <td><%= claims_tat.with_estimate %></td>
+          <td><%= format_date(claims_tat.assigned_to_adjuster) %></td>
+          <td><%= format_date(claims_tat.approved) %></td>
+          <td><%= format_date(claims_tat.final_report) %></td>
+          <td><%= format_date(claims_tat.loa_release) %></td>
+          <td><%= format_date(claims_tat.shop_out) %></td>
+          <td><%= format_date(claims_tat.invoice_received) %></td>
+          <td><%= format_date(claims_tat.payment_request) %></td>
+          <td><%= format_date(claims_tat.to_audit) %></td>
+          <td><%= format_date(claims_tat.to_treasury) %></td>
+          <td><%= link_to 'Show', claims_tat %></td>
+          <td><%= link_to 'Edit', edit_claims_tat_path(claims_tat) %></td>
+          <td><%= link_to 'Destroy', claims_tat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 

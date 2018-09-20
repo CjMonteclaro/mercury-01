@@ -14,15 +14,15 @@ ActiveRecord::Schema.define(version: 20180906024819) do
 
   create_table "claims_tats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "genweb_claim_id"
-    t.boolean "attached_estimate"
+    t.boolean "with_estimate"
     t.date "complete_doc"
-    t.date "to_adjuster"
+    t.date "assigned_to_adjuster"
     t.date "final_report"
-    t.date "approved_claims"
-    t.date "loa"
+    t.date "approved"
+    t.date "loa_release"
     t.date "shop_out"
     t.date "invoice_received"
-    t.date "request_payment"
+    t.date "payment_request"
     t.date "to_audit"
     t.date "to_treasury"
     t.datetime "created_at", null: false

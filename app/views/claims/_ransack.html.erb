@@ -10,9 +10,15 @@
       <div class="px-1 py-1 bg-secondary mr-sm-2 rounded">
         <%= f.search_field :assured_name_cont, placeholder: "Assured", class: 'form-control', :size => 7 %>
       </div>
-      <div class="px-1 py-1 bg-info mr-sm-2 rounded">
-        <%= content_tag :h6, 'Payee Class', class: 'text-light text-center'%>
-        <%= f.collection_select :giis_payee_classes_class_code_eq, GiisPayeeClass.all, :class_code, :description, include_blank: true, html: {:class=>'form-control'} %>
+      <div>
+        <div class="px-1 py-1 bg-info my-sm-2 mr-sm-2 rounded col-md-9 text-center">
+          <%= content_tag :h6, 'Payee Class', class: 'text-light text-center'%>
+          <%= f.collection_select :giis_payee_classes_class_code_eq, GiisPayeeClass.all, :class_code, :description, include_blank: true %>
+        </div>
+        <div class="px-1 py-1 bg-info my-sm-2 mr-sm-2 rounded">
+          <%= content_tag :h6, 'Claim Status', class: 'text-light text-center'%>
+          <%= f.collection_select :giis_clm_stat_status_eq, GiisClmStat.all, :status, :description, include_blank: true %>
+        </div>
       </div>
       <div>
         <div class="px-1 py-1 bg-info my-sm-2 mr-sm-2 rounded">

@@ -1,65 +1,55 @@
 <h3 class="text-center">TAT Details</h3>
 
-<p>
-  <strong>Genweb claim:</strong>
-  <%= @claims_tat.genweb_claim_id %>
-</p>
-
-<p>
-  <strong>Completion of document:</strong>
-  <%= format_date(@claims_tat.complete_doc) %>
-</p>
-
-<p>
-  <strong>With estimate:</strong>
-  <%= @claims_tat.with_estimate %>
-</p>
-
-<p>
-  <strong>Assigned to Adjuster:</strong>
-  <%= format_date(@claims_tat.assigned_to_adjuster) %>
-</p>
-
-<p>
-  <strong>Final Adjuster Report:</strong>
-  <%= format_date(@claims_tat.final_report) %>
-</p>
-
-<p>
-  <strong>Approved:</strong>
-  <%= format_date(@claims_tat.approved) %>
-</p>
-
-<p>
-  <strong>Loa release:</strong>
-  <%= format_date(@claims_tat.loa_release) %>
-</p>
-
-<p>
-  <strong>Out from shop:</strong>
-  <%= format_date(@claims_tat.shop_out) %>
-</p>
-
-<p>
-  <strong>Invoice recieved:</strong>
-  <%= format_date(@claims_tat.invoice_received) %>
-</p>
-
-<p>
-  <strong>Payment request:</strong>
-  <%= format_date(@claims_tat.payment_request) %>
-</p>
-
-<p>
-  <strong>To audit:</strong>
-  <%= format_date(@claims_tat.to_audit) %>
-</p>
-
-<p>
-  <strong>To treasury:</strong>
-  <%= format_date(@claims_tat.to_treasury) %>
-</p>
-
+ <table class="table col-md-5">
+   <tr>
+     <%= content_tag :td, 'Genweb Claim No: ' %>
+     <%= content_tag :td, @claims_tat.claim_no(@claims_tat.genweb_claim_id) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Completion of Document: ' %>
+     <%= content_tag :td, format_date(@claims_tat.complete_doc) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'With Attached Estimate: ' %>
+     <%= content_tag :td, @claims_tat.with_estimate %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Assigned to Adjuster: ' %>
+     <%= content_tag :td, format_date(@claims_tat.assigned_to_adjuster) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Final Adjuster Report: ' %>
+     <%= content_tag :td, format_date(@claims_tat.final_report) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Approved by Claims: ' %>
+     <%= content_tag :td, format_date(@claims_tat.approved) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Date of LOA: ' %>
+     <%= content_tag :td, format_date(@claims_tat.loa_release) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Out from Shop: ' %>
+     <%= content_tag :td, format_date(@claims_tat.shop_out) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Invoice Recieved: ' %>
+     <%= content_tag :td, format_date(@claims_tat.invoice_received) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'Request for Payment: ' %>
+     <%= content_tag :td, format_date(@claims_tat.payment_request) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'To Audit: ' %>
+     <%= content_tag :td, format_date(@claims_tat.to_audit) %>
+   </tr>
+   <tr>
+     <%= content_tag :td, 'To Treasury: ' %>
+     <%= content_tag :td, format_date(@claims_tat.to_treasury) %>
+   </tr>
+ </table>
 
 <%= link_to 'Edit', edit_claims_tat_path(@claims_tat) %> |
 <%= link_to 'Back', claims_tats_path %> |
