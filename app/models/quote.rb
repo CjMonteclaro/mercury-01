@@ -18,8 +18,8 @@ class Quote < ApplicationRecord
 
 	has_many :vehicles, through: :quote_vehicles
 
-	belongs_to :user
-	belongs_to :policy
+	belongs_to :user, optional: true
+	belongs_to :policy, optional: true
 
 	before_save :default_coverage_duration
 
@@ -28,30 +28,9 @@ class Quote < ApplicationRecord
 	end
 
 	def compute_base_premium
-
 		update(base_prem: self.quote_perils.sum(&:base_prem),
 					 coverage_limit: self.quote_perils.collect(&:sum_insured).max
 					)
-
-		# perils = self.perils.collect(&:shortname)
-		# peril_count = self.perils.count
-
-		# self.quote_charges.each do |qc|
-
-		# 	# if perils.include?('CTPL') && peril_count == 1
-		# 	# 	next if qc.charge_type_id == 1 || qc.charge_type_id == 2 || qc.charge_type_id == 3 || charge_rate.charge_type_id == 4
-		# 	# elsif perils.include?('CTPL') && peril_count > 1
-		# 	# 	#Add all charges
-		# 	# else
-		# 	# 	next if qc.charge_type_id == 5 || qc.charge_type_id == 6
-		# 	# end
-
-		# 	charge_rate_ids.each do |rate_id|
- 	# 			qc.charge_rate_id	<< rate_id
-		# 	end
-		# end
-
-
 	end
 
 	def compute_charges_and_gross_prem
@@ -62,8 +41,5 @@ class Quote < ApplicationRecord
 		update(total_charges: total_charges, gross_prem: base_prem + total_charges)
 	end
 
-	def compute_gross_prem
-		# update(gross_prem: base_prem + total_charges)
-	end
 
 end

@@ -13,22 +13,34 @@
   <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
   </ul>
 
-  <ul class="nav navbar-nav navbar-right">
-    <li class="nav-item dropdown mr-5">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Admin
-      </a>
-      <div class="dropdown-menu mr-2" aria-labelledby="navbarDropdownMenuLink">
-        <%= drop_link('Lines', lines_path) %>
-        <%= drop_link('Sublines', sublines_path) %>
-        <%= drop_link('Perils', perils_path) %>
-        <div class="dropdown-divider"></div>
-        <%= drop_link('Premium Table', premiums_path) %>
-
-      </div>
+  <ul class="nav navbar-nav ">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Views
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= drop_link('Lines', lines_path) %>
+          <%= drop_link('Sublines', sublines_path) %>
+          <%= drop_link('Perils', perils_path) %>
+          <%= drop_link('Vehicles Table', vehicles_path) %>
+          <div class="dropdown-divider"></div>
+          <%= drop_link('Premium Table', premiums_path) %>
+        </div>
     </li>
 
     <%= nav_link('New Quote', new_quote_path) %>
+
+    <% if user_signed_in? %>
+      <%= nav_link('Quotations', quotes_path) %>
+      <%= nav_link('Policies', policies_path, 'mr-5') %>
+      <%= nav_link("Hello, #{current_user.username}!", edit_user_path(current_user)) %>
+      <%= content_tag :li, class: 'nav-item' do %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+      <% end %>
+    <% else %>
+      <%= nav_link('Create Account', new_user_path) %>
+      <%= nav_link('Login', new_user_session_path) %>
+    <% end %>
   </ul>
   </div>
 

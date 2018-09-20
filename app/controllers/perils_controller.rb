@@ -1,6 +1,7 @@
 class PerilsController < ApplicationController
   before_action :set_peril, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /perils
   # GET /perils.json
   def index

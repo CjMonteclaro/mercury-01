@@ -8,7 +8,7 @@
       <th>ID</th>
       <th>Subline</th>
       <th>Perils</th>
-      <th>Premium</th>
+      <th>Vehicle</th>
       <th>Coverage limit</th>
       <th>Coverage duration</th>
       <th>Base prem</th>
@@ -28,7 +28,13 @@
             <%= content_tag :p, peril.name %>
           <% end %>
         </td>
-        <td><%= quote.premium_id %></td>
+
+        <td>
+          <% quote.quote_vehicles.each do |vehicle|%>
+            <%= content_tag :p, "#{vehicle.brand.name} #{vehicle.model.name}" %>
+          <% end %>
+        </td>
+
         <td><%= quote.coverage_limit %></td>
         <td><%= quote.coverage_duration %></td>
         <td><%= quote.base_prem %></td>

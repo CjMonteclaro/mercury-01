@@ -17,7 +17,7 @@ class ModelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create model" do
     assert_difference('Model.count') do
-      post models_url, params: { model: { name: @model.name } }
+      post models_url, params: { model: { brand_id: @model.brand_id, name: @model.name } }
     end
 
     assert_redirected_to model_url(Model.last)
@@ -34,7 +34,7 @@ class ModelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update model" do
-    patch model_url(@model), params: { model: { name: @model.name } }
+    patch model_url(@model), params: { model: { brand_id: @model.brand_id, name: @model.name } }
     assert_redirected_to model_url(@model)
   end
 

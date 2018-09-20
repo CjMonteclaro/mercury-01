@@ -1,19 +1,14 @@
 <div class="nested-fields row">
-  <%#= f.association :vehicle, as: :select, label_method: :vehicle_name, value_method: :id, wrapper_html: {class: 'col-sm-5'}%>
 
-  <%= f.input :brand, as: :select, collection: Brand.all, wrapper_html: { class: 'col-sm-5' } %>
-  <%= f.input :model, as: :select, collection: Model.all, wrapper_html: { class: 'col-sm-5' } %>
+  <%= f.input :brand_id, as: :select, collection: Brand.order(:name), wrapper_html: { class: 'col-sm-4' }, input_html: {class: "brand"} %>
+  <div class="row pt-4 px-3">
+    <%= f.grouped_collection_select :model_id, Brand.order(:name), :models, :name, :id, :name, { include_blank: true} %>
+  </div>
+  <%#= f.input :model_id, collection: Model.order(:name), as: :grouped_select, group_method: :name %>
+
   <%= f.input :plate_no, wrapper_html: { class: 'col-sm-8' } %>
   <%= f.input :mv_file_no, wrapper_html: { class: 'col-sm-8' } %>
   <%= f.input :engine_no, wrapper_html: { class: 'col-sm-8' } %>
   <%= f.input :chassis_no, wrapper_html: { class: 'col-sm-8' } %>
-
-  <%#= f.input :vehicle_id, wrapper_html: { class: 'col-sm-8' } %>
-
-  <%#= f.simple_fields_for :vehicles do |builder| %>
-    <%#= builder.association :brand, wrapper_html: { class: 'col-sm-8' }  %>
-    <%#= builder.association :model, wrapper_html: { class: 'col-sm-8' }  %>
-  <%# end %>
-
 
 </div>

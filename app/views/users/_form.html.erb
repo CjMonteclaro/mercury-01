@@ -1,21 +1,60 @@
-
 <%= simple_form_for(@user) do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
+  <%= content_tag :h2, yield(:title), class: "card-header text-center mb-3" %>
 
-    <%= f.input :username %>
+  <div class="row">
 
-    <%= f.input :email %>
+    <div class="col-sm-4">
+      <div class="card p-3">
+        <legend class="card-header text-center mb-3">Login Credentials</legend>
+        <%= f.input :username %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
 
-    <%= f.input :email_opt_in %>
+        <%= f.input :enabled %>
+      </div>
+    </div>
 
-    <%= f.input :enabled %>
+    <div class="col-sm-8">
+      <div class="card p-3">
+        <legend class="card-header text-center mb-3">User Profile</legend>
+        <div class="row">
+          <%= f.simple_fields_for :profile do |pr| %>
+            <div class="col-sm-6">
+                <%= pr.input :first_name %>
+                <%= pr.input :middle_name %>
+                <%= pr.input :last_name %>
+                <%= pr.input :birthdate, start_year: Date.today.year, end_year: Date.today.year - 70, order: [:day, :month, :year] %>
+            </div>
+
+            <div class="col-sm-6">
+              <%= f.input :email %>
+              <%= pr.input :address_1, label: 'Address Line 1' %>
+              <%= pr.input :address_2, label: 'Address Line 2' %>
+              <%= pr.input :phone %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <hr>
+
+  <div class="row align-items-center">
+
+    <div class="col-sm-8 alert alert-warning p-3">
+      <%#= f.input :privacy_opt_in, label: "I declare that all the information that I provide in this application form are mine, true, correct, and updated. By submitting my application, I authorize and provide my explicit consent to FGen's Data Processing, Profiling, and Sharing provisions as required under Republic Act 10173 and other applicable laws and regulations. I also agree to FGen's #{link_to 'Privacy Policy', 'http://fgeninsurance.com/privacy-policy', target: :blank }.".html_safe, class: 'mb-3' %>
+      <%= f.input :email_opt_in, label: "I agree to receive communications from FGen via email (inlcuding my e-policies and e-receipts)." %>
+    </div>
+
+    <div class="col-sm-4 text-center align-middle">
+      <%= create_or_edit_button_helper(f, params[:action]) %>
+
+    </div>
+
   </div>
+
 <% end %>

@@ -1,6 +1,7 @@
 class ChargeRatesController < ApplicationController
   before_action :set_charge_rate, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /charge_rates
   # GET /charge_rates.json
   def index

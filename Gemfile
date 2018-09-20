@@ -68,3 +68,5 @@ gem 'bootstrap4-kaminari-views'
 
 gem 'roo'
 gem 'cocoon'
+
+gem 'devise'

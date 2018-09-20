@@ -15,69 +15,42 @@
 //= require cocoon
 //= require_tree .
 
-// document.addEventListener('DOMContentLoaded', function() {
 
-
-//   $('#select-peril').on('change',
-//     function(){
-//      if ($('#select-peril').find('option:selected').val() !== [6, 7, 8])
-//       {
-//         $('.not-fixed').show();
-//         $('.fixed').hide();
-//       }
-//      else if ($('#select-peril').find('option:selected').val() !== [1, 2, 3, 4, 5])
-//       {
-//         $('.not-fixed').hide();
-//         $('.fixed').show();
-
-//       }
-//       else
-//       {
-
-//       }
-//   });
-
-
-   // $('#select-peril').on('change',
-   //  function(){
-   //    switch($('#select-peril').find('option:selected').val()) {
-   //    case 1:
-   //      $('.not-fixed').show();
-   //      $('.fixed').hide();
-   //      break;
-   //    case 2:
-   //      $('.not-fixed').show();
-   //      $('.fixed').hide();
-   //      break;
-   //    case 3:
-   //      $('.not-fixed').show();
-   //      $('.fixed').hide();
-   //      break;
-   //    case 4:
-   //      $('.not-fixed').show();
-   //      $('.fixed').hide();
-   //      break;
-   //    case 5:
-   //      $('.not-fixed').show();
-   //      $('.fixed').hide();
-   //      break;
-   //    case 6:
-   //      $('.not-fixed').hide();
-   //      $('.fixed').show();
-   //      break;
-   //    case 7:
-   //      $('.not-fixed').hide();
-   //      $('.fixed').show();
-   //      break;
-   //    case 8:
-   //      $('.not-fixed').hide();
-   //      $('.fixed').show();
-   //      break;
-   //    default:
-   //      $('.fixed').hide();
-
-   //      $('.not-fixed').hide();
-   //    }
-   //  }
-
-});
+// $(document).ready(function() {
+//   //
+//   // $(".text-si").show();
+//   // $(".select-si").hide();
+//     // $('*')
+//       // .on('cocoon:before-insert', function() {
+//         perils = $(".select_peril :selected").val()
+//         console.log(perils)
+//
+//         $(".text-si").hide();
+//         switch (perils) {
+//           case 6:
+//           $(".text-si").hide();
+//           $(".select-si").show();
+//           break;
+//           case 7:
+//           $(".text-si").hide();
+//           $(".select-si").show();
+//           break;
+//           case 8:
+//           $(".text-si").hide();
+//           $(".select-si").show();
+//           break;
+//           default:
+//           $(".text-si").show();
+//           $(".select-si").hide();
+//         }
+//
+//       // })
+//     // $('*').bind('cocoon:after-insert',
+//     //      function() {\
+// // document.addEventListener('DOMContentLoaded', function() {
+//   // $(".select_peril").on('change', function(){
+//
+//
+//   // })
+//
+// });

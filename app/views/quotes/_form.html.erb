@@ -14,8 +14,7 @@
         <%= render 'quote_vehicle_fields.html.erb', f: builder %>
       <% end %>
 
-
-      <%= f.association :charge_rates, as: :check_boxes, label_method: :shortname, checked: [1, 2, 6], wrapper_html: {class: 'col-sm-3'}%>
+      <%= f.association :charge_rates, as: :check_boxes, label_method: :shortname, checked: [1, 2, 3], wrapper_html: {class: 'col-sm-3'}%>
     </div>
 
     <div class="col-sm-6 perils">
@@ -25,7 +24,7 @@
       <% end %>
 
       <div class="links text-right">
-        <%= link_to_add_association 'Add Peril', f, :quote_perils, class: 'btn btn-primary text-white' %>
+        <%= link_to_add_association '+ Add Peril', f, :quote_perils, class: 'btn btn-primary text-white' %>
       </div>
     </div>
 

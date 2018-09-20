@@ -1,6 +1,7 @@
 class ChargeTypesController < ApplicationController
   before_action :set_charge_type, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /charge_types
   # GET /charge_types.json
   def index

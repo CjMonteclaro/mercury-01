@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180903021914) do
+ActiveRecord::Schema.define(version: 20180910063530) do
 
   create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180903021914) do
   end
 
   create_table "models", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "brand_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -124,9 +125,10 @@ ActiveRecord::Schema.define(version: 20180903021914) do
 
   create_table "quote_vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "quote_id"
-    t.integer "vehicle_id"
-    t.string "mv_file_no"
+    t.integer "brand_id"
+    t.integer "model_id"
     t.string "plate_no"
+    t.string "mv_file_no"
     t.string "engine_no"
     t.string "chassis_no"
     t.datetime "created_at", null: false
@@ -166,6 +168,11 @@ ActiveRecord::Schema.define(version: 20180903021914) do
     t.boolean "enabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

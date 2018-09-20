@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_user!
 
   # GET /users
   # GET /users.json
@@ -15,10 +16,16 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @profile = @user.build_profile
   end
 
   # GET /users/1/edit
   def edit
+    if @user.profile.blank?
+      @profile = @user.build_profile
+    else
+      @profile = @user.profile
+    end
   end
 
   # POST /users
@@ -69,6 +76,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :email_opt_in, :enabled)
+      params.require(:user).permit(:username, :email, :email_opt_in, :enabled,
+      profile_attributes: [:id, :user_id, :first_name, :middle_name, :last_name, :birthdate, :address_1, :address_2, :city_id, :province_id, :phone]
+      )
     end
 end

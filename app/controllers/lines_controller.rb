@@ -1,6 +1,7 @@
 class LinesController < ApplicationController
   before_action :set_line, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /lines
   # GET /lines.json
   def index

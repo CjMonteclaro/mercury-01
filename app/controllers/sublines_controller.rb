@@ -1,5 +1,6 @@
 class SublinesController < ApplicationController
   before_action :set_subline, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /sublines
   # GET /sublines.json

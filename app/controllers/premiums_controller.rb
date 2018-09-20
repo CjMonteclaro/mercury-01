@@ -1,10 +1,11 @@
 class PremiumsController < ApplicationController
   before_action :set_premium, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /premiums
   # GET /premiums.json
   def index
-    @premiums = Premium.all
+    @premiums = Premium.all.page(params[:page])
   end
 
   # GET /premiums/1

@@ -14,7 +14,7 @@ class Vehicle < ApplicationRecord
       self.find_or_create_by(
       year_model: spreadsheet.cell(i,'A'),
       brand_id: Brand.find_or_create_by(name: spreadsheet.cell(i,'B')).id,
-      model_id: Model.find_or_create_by(name: spreadsheet.cell(i,'C')).id
+      model_id: Model.find_or_create_by(brand_id: Brand.find_or_create_by(name: spreadsheet.cell(i,'B')).id, name: spreadsheet.cell(i,'C')).id
       )
     end
   end

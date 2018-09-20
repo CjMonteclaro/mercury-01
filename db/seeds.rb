@@ -57,7 +57,7 @@ puts "Generating Charges table ..."
 ct = [
   ["Value Added Tax - Output", "VAT-Output", 12, "percentage"],
   ["Doc Stamps Tax", "DST", 12.5, "percentage"],
-  ["Local Govt Tax", "LGT", nil],
+  ["Local Govt Tax", "LGT", 0.75, "percentage"],
   ["Roadside Assistance", "RA", 100, "currency"],
   ["COC Verification", "COCVF", 50.40, "currency"],
   ["Online Transaction Fee", "OTF", 10, "currency"]

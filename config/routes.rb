@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :brands
+  devise_for :users
   resources :models
+  resources :brands
   resources :profiles
   resources :policies
-  resources :quote_vehicles
   resources :quotes
   resources :users
   resources :charge_rates

@@ -2,8 +2,18 @@
 
 one:
   quote_id: 1
-  vehicle_id: 1
+  brand_id: 1
+  model_id: 1
+  plate_no: MyString
+  mv_file_no: MyString
+  engine_no: MyString
+  chassis_no: MyString
 
 two:
   quote_id: 1
-  vehicle_id: 1
+  brand_id: 1
+  model_id: 1
+  plate_no: MyString
+  mv_file_no: MyString
+  engine_no: MyString
+  chassis_no: MyString

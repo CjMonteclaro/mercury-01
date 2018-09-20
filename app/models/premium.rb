@@ -33,7 +33,7 @@ class Premium < ApplicationRecord
   	Peril.where(id: self.peril_id).collect(&:shortname).first
   end
 
-  def self.coverage_label
+  def self.coverage
     Premium.all.where(subline_id: '1', peril_id: '7').collect(&:coverage_limit)
   end
 

@@ -1,6 +1,7 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /models
   # GET /models.json
   def index
@@ -69,6 +70,6 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:name)
+      params.require(:model).permit(:brand_id, :name)
     end
 end
